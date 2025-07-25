@@ -1,18 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1753400454504" clover="3.2.0">
-  <project timestamp="1753400454504" name="All files">
-    <metrics statements="9" coveredstatements="9" conditionals="2" coveredconditionals="1" methods="1" coveredmethods="1" elements="12" coveredelements="11" complexity="0" loc="9" ncloc="9" packages="1" files="1" classes="1"/>
+<coverage generated="1753403558966" clover="3.2.0">
+  <project timestamp="1753403558966" name="All files">
+    <metrics statements="13" coveredstatements="13" conditionals="10" coveredconditionals="10" methods="1" coveredmethods="1" elements="24" coveredelements="24" complexity="0" loc="13" ncloc="13" packages="1" files="1" classes="1"/>
     <file name="Perfume.js" path="/Users/ankamason/perfume-collection-app/src/models/Perfume.js">
-      <metrics statements="9" coveredstatements="9" conditionals="2" coveredconditionals="1" methods="1" coveredmethods="1"/>
-      <line num="13" count="1" type="stmt"/>
-      <line num="14" count="1" type="stmt"/>
+      <metrics statements="13" coveredstatements="13" conditionals="10" coveredconditionals="10" methods="1" coveredmethods="1"/>
+      <line num="14" count="4" type="cond" truecount="4" falsecount="0"/>
       <line num="15" count="1" type="stmt"/>
-      <line num="16" count="1" type="stmt"/>
-      <line num="17" count="1" type="stmt"/>
-      <line num="18" count="1" type="stmt"/>
-      <line num="19" count="1" type="stmt"/>
+      <line num="19" count="3" type="cond" truecount="4" falsecount="0"/>
       <line num="20" count="1" type="stmt"/>
-      <line num="25" count="1" type="stmt"/>
+      <line num="23" count="2" type="stmt"/>
+      <line num="24" count="2" type="stmt"/>
+      <line num="25" count="2" type="stmt"/>
+      <line num="26" count="2" type="stmt"/>
+      <line num="27" count="2" type="stmt"/>
+      <line num="28" count="2" type="stmt"/>
+      <line num="29" count="2" type="stmt"/>
+      <line num="30" count="2" type="stmt"/>
+      <line num="34" count="1" type="stmt"/>
     </file>
   </project>
 </coverage>
