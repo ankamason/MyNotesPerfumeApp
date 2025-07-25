@@ -1,22 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1753469900334" clover="3.2.0">
-  <project timestamp="1753469900334" name="All files">
-    <metrics statements="13" coveredstatements="13" conditionals="10" coveredconditionals="10" methods="1" coveredmethods="1" elements="24" coveredelements="24" complexity="0" loc="13" ncloc="13" packages="1" files="1" classes="1"/>
+<coverage generated="1753474696472" clover="3.2.0">
+  <project timestamp="1753474696472" name="All files">
+    <metrics statements="54" coveredstatements="54" conditionals="22" coveredconditionals="21" methods="23" coveredmethods="23" elements="99" coveredelements="98" complexity="0" loc="54" ncloc="54" packages="1" files="2" classes="2"/>
     <file name="Perfume.js" path="/Users/ankamason/perfume-collection-app/src/models/Perfume.js">
       <metrics statements="13" coveredstatements="13" conditionals="10" coveredconditionals="10" methods="1" coveredmethods="1"/>
-      <line num="14" count="12" type="cond" truecount="4" falsecount="0"/>
+      <line num="14" count="38" type="cond" truecount="4" falsecount="0"/>
       <line num="15" count="1" type="stmt"/>
-      <line num="19" count="11" type="cond" truecount="4" falsecount="0"/>
+      <line num="19" count="37" type="cond" truecount="4" falsecount="0"/>
       <line num="20" count="1" type="stmt"/>
-      <line num="23" count="10" type="stmt"/>
-      <line num="24" count="10" type="stmt"/>
-      <line num="25" count="10" type="stmt"/>
-      <line num="26" count="10" type="stmt"/>
-      <line num="27" count="10" type="stmt"/>
-      <line num="28" count="10" type="stmt"/>
-      <line num="29" count="10" type="stmt"/>
-      <line num="30" count="10" type="stmt"/>
+      <line num="23" count="36" type="stmt"/>
+      <line num="24" count="36" type="stmt"/>
+      <line num="25" count="36" type="stmt"/>
+      <line num="26" count="36" type="stmt"/>
+      <line num="27" count="36" type="stmt"/>
+      <line num="28" count="36" type="stmt"/>
+      <line num="29" count="36" type="stmt"/>
+      <line num="30" count="36" type="stmt"/>
+      <line num="34" count="2" type="stmt"/>
+    </file>
+    <file name="UserCollection.js" path="/Users/ankamason/perfume-collection-app/src/models/UserCollection.js">
+      <metrics statements="41" coveredstatements="41" conditionals="12" coveredconditionals="11" methods="22" coveredmethods="22"/>
+      <line num="5" count="8" type="stmt"/>
+      <line num="6" count="8" type="stmt"/>
+      <line num="12" count="27" type="cond" truecount="2" falsecount="0"/>
+      <line num="13" count="1" type="stmt"/>
+      <line num="16" count="26" type="stmt"/>
+      <line num="17" count="26" type="stmt"/>
+      <line num="22" count="1" type="stmt"/>
+      <line num="23" count="2" type="stmt"/>
+      <line num="24" count="1" type="stmt"/>
+      <line num="29" count="4" type="stmt"/>
       <line num="34" count="1" type="stmt"/>
+      <line num="39" count="50" type="stmt"/>
+      <line num="44" count="3" type="stmt"/>
+      <line num="49" count="1" type="stmt"/>
+      <line num="50" count="3" type="stmt"/>
+      <line num="55" count="3" type="stmt"/>
+      <line num="60" count="2" type="stmt"/>
+      <line num="63" count="2" type="stmt"/>
+      <line num="64" count="10" type="stmt"/>
+      <line num="70" count="10" type="stmt"/>
+      <line num="71" count="56" type="cond" truecount="2" falsecount="0"/>
+      <line num="76" count="2" type="stmt"/>
+      <line num="77" count="38" type="stmt"/>
+      <line num="80" count="116" type="cond" truecount="2" falsecount="0"/>
+      <line num="81" count="31" type="stmt"/>
+      <line num="84" count="85" type="stmt"/>
+      <line num="90" count="2" type="stmt"/>
+      <line num="91" count="2" type="stmt"/>
+      <line num="94" count="2" type="stmt"/>
+      <line num="95" count="13" type="stmt"/>
+      <line num="96" count="13" type="cond" truecount="2" falsecount="0"/>
+      <line num="100" count="2" type="stmt"/>
+      <line num="101" count="2" type="stmt"/>
+      <line num="102" count="7" type="stmt"/>
+      <line num="109" count="2" type="stmt"/>
+      <line num="110" count="7" type="stmt"/>
+      <line num="117" count="7" type="cond" truecount="2" falsecount="0"/>
+      <line num="118" count="5" type="stmt"/>
+      <line num="121" count="2" type="stmt"/>
+      <line num="124" count="2" type="stmt"/>
+      <line num="133" count="1" type="stmt"/>
     </file>
   </project>
 </coverage>
