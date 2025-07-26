@@ -3,15 +3,15 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for UserCollection.js</title>
+    <title>Code coverage report for services/RecommendationEngine.js</title>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="prettify.css" />
-    <link rel="stylesheet" href="base.css" />
-    <link rel="shortcut icon" type="image/x-icon" href="favicon.png" />
+    <link rel="stylesheet" href="../prettify.css" />
+    <link rel="stylesheet" href="../base.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="../favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style type='text/css'>
         .coverage-summary .sorter {
-            background-image: url(sort-arrow-sprite.png);
+            background-image: url(../sort-arrow-sprite.png);
         }
     </style>
 </head>
@@ -19,34 +19,34 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="index.html">All files</a> UserCollection.js</h1>
+        <h1><a href="../index.html">All files</a> / <a href="index.html">services</a> RecommendationEngine.js</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">43.13% </span>
+                <span class="strong">90% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>44/102</span>
+                <span class='fraction'>126/140</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">42.3% </span>
+                <span class="strong">75% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>11/26</span>
+                <span class='fraction'>36/48</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">55% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>22/40</span>
+                <span class='fraction'>28/28</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">42.26% </span>
+                <span class="strong">90.44% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>41/97</span>
+                <span class='fraction'>123/136</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -334,31 +334,334 @@
 <a name='L269'></a><a href='#L269'>269</a>
 <a name='L270'></a><a href='#L270'>270</a>
 <a name='L271'></a><a href='#L271'>271</a>
-<a name='L272'></a><a href='#L272'>272</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L272'></a><a href='#L272'>272</a>
+<a name='L273'></a><a href='#L273'>273</a>
+<a name='L274'></a><a href='#L274'>274</a>
+<a name='L275'></a><a href='#L275'>275</a>
+<a name='L276'></a><a href='#L276'>276</a>
+<a name='L277'></a><a href='#L277'>277</a>
+<a name='L278'></a><a href='#L278'>278</a>
+<a name='L279'></a><a href='#L279'>279</a>
+<a name='L280'></a><a href='#L280'>280</a>
+<a name='L281'></a><a href='#L281'>281</a>
+<a name='L282'></a><a href='#L282'>282</a>
+<a name='L283'></a><a href='#L283'>283</a>
+<a name='L284'></a><a href='#L284'>284</a>
+<a name='L285'></a><a href='#L285'>285</a>
+<a name='L286'></a><a href='#L286'>286</a>
+<a name='L287'></a><a href='#L287'>287</a>
+<a name='L288'></a><a href='#L288'>288</a>
+<a name='L289'></a><a href='#L289'>289</a>
+<a name='L290'></a><a href='#L290'>290</a>
+<a name='L291'></a><a href='#L291'>291</a>
+<a name='L292'></a><a href='#L292'>292</a>
+<a name='L293'></a><a href='#L293'>293</a>
+<a name='L294'></a><a href='#L294'>294</a>
+<a name='L295'></a><a href='#L295'>295</a>
+<a name='L296'></a><a href='#L296'>296</a>
+<a name='L297'></a><a href='#L297'>297</a>
+<a name='L298'></a><a href='#L298'>298</a>
+<a name='L299'></a><a href='#L299'>299</a>
+<a name='L300'></a><a href='#L300'>300</a>
+<a name='L301'></a><a href='#L301'>301</a>
+<a name='L302'></a><a href='#L302'>302</a>
+<a name='L303'></a><a href='#L303'>303</a>
+<a name='L304'></a><a href='#L304'>304</a>
+<a name='L305'></a><a href='#L305'>305</a>
+<a name='L306'></a><a href='#L306'>306</a>
+<a name='L307'></a><a href='#L307'>307</a>
+<a name='L308'></a><a href='#L308'>308</a>
+<a name='L309'></a><a href='#L309'>309</a>
+<a name='L310'></a><a href='#L310'>310</a>
+<a name='L311'></a><a href='#L311'>311</a>
+<a name='L312'></a><a href='#L312'>312</a>
+<a name='L313'></a><a href='#L313'>313</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">8x</span>
-<span class="cline-any cline-yes">8x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">27x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">26x</span>
-<span class="cline-any cline-yes">26x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">81x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">21x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">11x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">11x</span>
+<span class="cline-any cline-yes">58x</span>
+<span class="cline-any cline-yes">58x</span>
+<span class="cline-any cline-yes">48x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">11x</span>
+<span class="cline-any cline-yes">39x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">14x</span>
+<span class="cline-any cline-yes">14x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">26x</span>
+<span class="cline-any cline-yes">26x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">12x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">234x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">17x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -367,236 +670,11 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">50x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">10x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">10x</span>
-<span class="cline-any cline-yes">56x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">38x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">116x</span>
-<span class="cline-any cline-yes">31x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">85x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">13x</span>
-<span class="cline-any cline-yes">13x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">7x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">7x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">7x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -605,294 +683,339 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">// src/models/UserCollection.js
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span></td><td class="text"><pre class="prettyprint lang-js">// src/services/RecommendationEngine.js
 &nbsp;
-class UserCollection {
-  constructor() {
-    this.perfumes = [];
-    this.createdAt = new Date();
-  }
+const { NoteClassifier } = require('../data/NoteClassification.js');
+&nbsp;
+class RecommendationEngine {
   
-  // Add a perfume to the collection (with duplicate prevention)
-  addPerfume(perfume) {
-    // Check for duplicates by ID
-    if (this.hasPerfume(perfume.id)) {
-      return false; // Don't add duplicate
-    }
-    
-    this.perfumes.push(perfume);
-    return true;
-  }
-  
-  // Remove perfume by ID
-  removePerfume(perfumeId) {
-    const initialLength = this.perfumes.length;
-    this.perfumes = this.perfumes.filter(perfume =&gt; perfume.id !== perfumeId);
-    return this.perfumes.length &lt; initialLength; // Return true if something was removed
-  }
-  
-  // Get collection size
-  getSize() {
-    return this.perfumes.length;
-  }
-  
-  // Get all perfumes
-  getAllPerfumes() {
-    return this.perfumes;
-  }
-  
-  // Check if collection has specific perfume by ID
-  hasPerfume(perfumeId) {
-    return this.perfumes.some(perfume =&gt; perfume.id === perfumeId);
-  }
-  
-  // Find perfumes by fragrance family
-  getPerfumesByFamily(family) {
-    return this.perfumes.filter(perfume =&gt; perfume.fragranceFamily === family);
-  }
-  
-  // Find perfumes containing a specific note (in any position!)
-  getPerfumesWithNote(note) {
-    return this.perfumes.filter(perfume =&gt; {
-      const allNotes = [
-        ...perfume.notes.top,
-        ...perfume.notes.middle,
-        ...perfume.notes.base
-      ];
-      return allNotes.includes(note);
-    });
-  }
-    // Get most popular notes across entire collection
-  getMostPopularNotes() {
-    const noteCount = {};
-    
-    // Count occurrences of each note across all perfumes and positions
-    this.perfumes.forEach(perfume =&gt; {
-      const allNotes = [
-        ...perfume.notes.top,
-        ...perfume.notes.middle,
-        ...perfume.notes.base
-      ];
-      
-      allNotes.forEach(note =&gt; {
-        noteCount[note] = (noteCount[note] || 0) + 1;
-      });
-    });
-    
-    // Convert to array of objects and sort by count (descending)
-    return Object.entries(noteCount)
-      .map(([note, count]) =&gt; ({ note, count }))
-      .sort((a, b) =&gt; {
-        // Primary sort: by count (descending)
-        if (b.count !== a.count) {
-          return b.count - a.count;
-        }
-        // Secondary sort: alphabetically for ties
-        return a.note.localeCompare(b.note);
-      });
-  }
-  
-  // Get fragrance family distribution with statistics
-  getFamilyDistribution() {
-    const familyCount = {};
-    const total = this.perfumes.length;
-    
-    // Count each family
-    this.perfumes.forEach(perfume =&gt; {
-      const family = perfume.fragranceFamily;
-      familyCount[family] = (familyCount[family] || 0) + 1;
-    });
-    
-    // Create families object with counts and percentages
-    const families = {};
-    Object.entries(familyCount).forEach(([family, count]) =&gt; {
-      families[family] = {
-        count: count,
-        percentage: total &gt; 0 ? Math.round((count / total) * 100 * 100) / 100 : <span class="branch-1 cbranch-no" title="branch not covered" >0 </span>// Round to 2 decimals
+  // Find perfumes similar to a target perfume
+  static findSimilarPerfumes(targetPerfume, candidatePerfumes, maxResults = 10) {
+    const recommendations = candidatePerfumes.map(candidate =&gt; {
+      const similarity = this.calculateSimilarityScore(targetPerfume, candidate);
+      return {
+        perfume: candidate,
+        similarityScore: similarity.score,
+        sharedNotes: similarity.sharedNotes,
+        reasoning: similarity.reasoning
       };
     });
     
-    // Create sorted array by popularity
-    const sortedByPopularity = Object.entries(families)
-      .map(([family, stats]) =&gt; ({
-        family: family,
-        count: stats.count,
-        percentage: stats.percentage
-      }))
-      .sort((a, b) =&gt; {
-        // Primary sort: by count (descending)
-        if (b.count !== a.count) {
-          return b.count - a.count;
-        }
-        // Secondary sort: alphabetically for ties
-        return a.family.localeCompare(b.family);
-      });
-    
-    return {
-      total: total,
-      families: families,
-      sortedByPopularity: sortedByPopularity
-    };
-  }
-&nbsp;
-  // Analyze subcategory preferences across entire collection
-<span class="fstat-no" title="function not covered" >  an</span>alyzeSubcategoryPreferences() {
-    const subcategoryCount = <span class="cstat-no" title="statement not covered" >{};</span>
-    let totalNotes = <span class="cstat-no" title="statement not covered" >0;</span>
-&nbsp;
-    // Count notes by subcategory
-<span class="cstat-no" title="statement not covered" >    this.perfumes.forEach(<span class="fstat-no" title="function not covered" >pe</span>rfume =&gt; {</span>
-      const allNotes = <span class="cstat-no" title="statement not covered" >[</span>
-        ...perfume.notes.top,
-        ...perfume.notes.middle,
-        ...perfume.notes.base
-      ];
-      
-<span class="cstat-no" title="statement not covered" >      allNotes.forEach(<span class="fstat-no" title="function not covered" >no</span>te =&gt; {</span>
-        const classification = <span class="cstat-no" title="statement not covered" >NoteClassifier.classifyNote(note);</span>
-        const familyKey = <span class="cstat-no" title="statement not covered" >classification.familyKey;</span>
-        const subcategoryKey = <span class="cstat-no" title="statement not covered" >classification.subcategoryKey;</span>
-        
-<span class="cstat-no" title="statement not covered" >        if (!subcategoryCount[familyKey]) {</span>
-<span class="cstat-no" title="statement not covered" >          subcategoryCount[familyKey] = {};</span>
-        }
-        
-<span class="cstat-no" title="statement not covered" >        if (!subcategoryCount[familyKey][subcategoryKey]) {</span>
-<span class="cstat-no" title="statement not covered" >          subcategoryCount[familyKey][subcategoryKey] = {</span>
-            count: 0,
-            notes: [],
-            character: classification.character,
-            intensity: classification.intensity
-          };
-        }
-        
-<span class="cstat-no" title="statement not covered" >        subcategoryCount[familyKey][subcategoryKey].count++;</span>
-<span class="cstat-no" title="statement not covered" >        subcategoryCount[familyKey][subcategoryKey].notes.push(note);</span>
-<span class="cstat-no" title="statement not covered" >        totalNotes++;</span>
-      });
-    });
-    
-    // Calculate percentages
-<span class="cstat-no" title="statement not covered" >    Object.keys(subcategoryCount).forEach(<span class="fstat-no" title="function not covered" >fa</span>milyKey =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >      Object.keys(subcategoryCount[familyKey]).forEach(<span class="fstat-no" title="function not covered" >su</span>bcategoryKey =&gt; {</span>
-        const count = <span class="cstat-no" title="statement not covered" >subcategoryCount[familyKey][subcategoryKey].count;</span>
-<span class="cstat-no" title="statement not covered" >        subcategoryCount[familyKey][subcategoryKey].percentage = </span>
-          Math.round((count / totalNotes) * 100 * 100) / 100;
-      });
-    });
-    
-<span class="cstat-no" title="statement not covered" >    return subcategoryCount;</span>
+    // Sort by similarity score (highest first)
+    return recommendations
+      .sort((a, b) =&gt; b.similarityScore - a.similarityScore)
+      .slice(0, maxResults);
   }
   
-  // Get intensity profile of the collection
-<span class="fstat-no" title="function not covered" >  ge</span>tIntensityProfile() {
-    const allNotes = <span class="cstat-no" title="statement not covered" >[];</span>
-<span class="cstat-no" title="statement not covered" >    this.perfumes.forEach(<span class="fstat-no" title="function not covered" >pe</span>rfume =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >      allNotes.push(...perfume.notes.top, ...perfume.notes.middle, ...perfume.notes.base);</span>
-    });
+  // Calculate how similar two perfumes are (0-1 scale)
+  static calculateSimilarityScore(perfume1, perfume2) {
+    let score = 0;
+    let maxPossibleScore = 0;
+    const reasoning = [];
+    const sharedNotes = [];
     
-    const intensityCount = <span class="cstat-no" title="statement not covered" >NoteClassifier.analyzeIntensityProfile(allNotes);</span>
-    const total = <span class="cstat-no" title="statement not covered" >Object.values(intensityCount).reduce(<span class="fstat-no" title="function not covered" >(s</span>um, count) =&gt; <span class="cstat-no" title="statement not covered" >sum + count,</span> 0);</span>
+    // Get all notes from both perfumes
+    const notes1 = this.getAllNotes(perfume1);
+    const notes2 = this.getAllNotes(perfume2);
     
-    // Calculate percentages and find dominant intensity
-    const intensityProfile = <span class="cstat-no" title="statement not covered" >{};</span>
-    let dominantIntensity = <span class="cstat-no" title="statement not covered" >'';</span>
-    let maxCount = <span class="cstat-no" title="statement not covered" >0;</span>
+    // 1. SHARED NOTES SCORING (main factor)
+    const noteMatches = notes1.filter(note1 =&gt; 
+      notes2.some(note2 =&gt; note1.toLowerCase() === note2.toLowerCase())
+    );
     
-<span class="cstat-no" title="statement not covered" >    Object.entries(intensityCount).forEach(<span class="fstat-no" title="function not covered" >([</span>intensity, count]) =&gt; {</span>
-      const percentage = <span class="cstat-no" title="statement not covered" >total &gt; 0 ? Math.round((count / total) * 100 * 100) / 100 : 0;</span>
-<span class="cstat-no" title="statement not covered" >      intensityProfile[intensity] = { count, percentage };</span>
-      
-<span class="cstat-no" title="statement not covered" >      if (count &gt; maxCount) {</span>
-<span class="cstat-no" title="statement not covered" >        maxCount = count;</span>
-<span class="cstat-no" title="statement not covered" >        dominantIntensity = intensity;</span>
+    sharedNotes.push(...noteMatches);
+    score += noteMatches.length;
+    maxPossibleScore += Math.max(notes1.length, notes2.length);
+    
+    if (noteMatches.length &gt; 0) {
+      reasoning.push(`${noteMatches.length} shared notes: ${noteMatches.join(', ')}`);
+    }
+    
+    // 2. FRAGRANCE FAMILY BONUS
+    if (perfume1.fragranceFamily === perfume2.fragranceFamily) {
+      score += 0.5;
+      reasoning.push(`Same fragrance family: ${perfume1.fragranceFamily}`);
+    }
+    maxPossibleScore += 0.5;
+    
+    // 3. BASE NOTES BONUS (they're more important for longevity)
+    const baseMatches = perfume1.notes.base.filter(note1 =&gt;
+      perfume2.notes.base.some(note2 =&gt; note1.toLowerCase() === note2.toLowerCase())
+    );
+    
+    if (baseMatches.length &gt; 0) {
+      score += 0.2 * baseMatches.length;
+      reasoning.push(`Shared base notes: ${baseMatches.join(', ')}`);
+    }
+    maxPossibleScore += 0.2 * Math.max(perfume1.notes.base.length, perfume2.notes.base.length);
+    
+    // 4. SUBCATEGORY RELATIONSHIP BONUS (using our classification system!)
+    const subcategoryBonus = this.calculateSubcategoryBonus(perfume1, perfume2);
+    score += subcategoryBonus.score;
+    maxPossibleScore += 0.3;
+    
+    <span class="missing-if-branch" title="if path not taken" >I</span>if (subcategoryBonus.reasoning) {
+<span class="cstat-no" title="statement not covered" >      reasoning.push(subcategoryBonus.reasoning);</span>
+    }
+    
+    // Normalize to 0-1 scale
+    const normalizedScore = maxPossibleScore &gt; 0 ? score / maxPossibleScore : <span class="branch-1 cbranch-no" title="branch not covered" >0;</span>
+    
+    return {
+      score: Math.round(normalizedScore * 100) / 100, // Round to 2 decimals
+      sharedNotes: sharedNotes,
+      reasoning: reasoning
+    };
+  }
+  
+  // Helper: Get all notes from a perfume
+  static getAllNotes(perfume) {
+    return [
+      ...perfume.notes.top,
+      ...perfume.notes.middle,
+      ...perfume.notes.base
+    ];
+  }
+  
+  // Helper: Calculate bonus for related subcategories
+  static calculateSubcategoryBonus(perfume1, perfume2) {
+    const notes1 = this.getAllNotes(perfume1);
+    const notes2 = this.getAllNotes(perfume2);
+    
+    // Find dominant subcategories for each perfume
+    const subcategories1 = this.getDominantSubcategories(notes1);
+    const subcategories2 = this.getDominantSubcategories(notes2);
+    
+    // Check for complementary relationships
+    let bonus = 0;
+    let reasoning = '';
+    
+    for (const subcat1 of subcategories1) {
+<span class="cstat-no" title="statement not covered" >      for (const subcat2 of subcategories2) {</span>
+<span class="cstat-no" title="statement not covered" >        if (subcat1 === subcat2) {</span>
+<span class="cstat-no" title="statement not covered" >          bonus = 0.3; </span>// Same subcategory
+<span class="cstat-no" title="statement not covered" >          reasoning = `Both have ${subcat1} characteristics`;</span>
+<span class="cstat-no" title="statement not covered" >          break;</span>
+        }
+        
+        // Check if they're complementary
+        const complements = <span class="cstat-no" title="statement not covered" >NoteClassifier.getComplementarySubcategories(subcat1);</span>
+<span class="cstat-no" title="statement not covered" >        if (complements.includes(subcat2)) {</span>
+<span class="cstat-no" title="statement not covered" >          bonus = 0.2; </span>// Complementary subcategories
+<span class="cstat-no" title="statement not covered" >          reasoning = `${subcat1} complements ${subcat2}`;</span>
+<span class="cstat-no" title="statement not covered" >          break;</span>
+        }
+      }
+<span class="cstat-no" title="statement not covered" >      if (bonus &gt; 0) <span class="cstat-no" title="statement not covered" >break;</span></span>
+    }
+    
+    return { score: bonus, reasoning: reasoning };
+  }
+  
+  // Helper: Find dominant subcategories in a set of notes
+  static getDominantSubcategories(notes) {
+    const subcategoryCounts = {};
+    
+    notes.forEach(note =&gt; {
+      const classification = NoteClassifier.classifyNote(note);
+      if (classification.subcategoryKey !== 'UNKNOWN') {
+        subcategoryCounts[classification.subcategoryKey] = 
+          (subcategoryCounts[classification.subcategoryKey] || 0) + 1;
       }
     });
     
-    // Add summary
-<span class="cstat-no" title="statement not covered" >    intensityProfile.dominantIntensity = dominantIntensity;</span>
-<span class="cstat-no" title="statement not covered" >    intensityProfile.description = this.getIntensityDescription(dominantIntensity, intensityProfile);</span>
+    // Return subcategories with 2+ notes (dominant ones)
+    return Object.keys(subcategoryCounts).filter(subcat =&gt; 
+      subcategoryCounts[subcat] &gt;= 2
+    );
+  }
+&nbsp;
+        // Add these methods to the RecommendationEngine class
+&nbsp;
+  // Get recommendations based on entire user collection
+  static getCollectionBasedRecommendations(userCollection, candidatePerfumes, maxResults = 10) {
+    // 1. Create user profile from their collection
+    const userProfile = this.createUserProfile(userCollection);
     
-<span class="cstat-no" title="statement not covered" >    return intensityProfile;</span>
+    // 2. Score each candidate against the user profile
+    const recommendations = candidatePerfumes.map(candidate =&gt; {
+      const match = this.calculateCollectionMatchScore(candidate, userProfile);
+      return {
+        perfume: candidate,
+        matchScore: match.score,
+        reasoning: match.reasoning,
+        userProfile: userProfile // Include for transparency
+      };
+    });
+    
+    // 3. Sort by match score (highest first)
+    return recommendations
+      .sort((a, b) =&gt; b.matchScore - a.matchScore)
+      .slice(0, maxResults);
   }
   
-  // Get description of intensity preference
-<span class="fstat-no" title="function not covered" >  ge</span>tIntensityDescription(dominantIntensity, profile) {
-    const percentage = <span class="cstat-no" title="statement not covered" >profile[dominantIntensity]?.percentage || 0;</span>
-    
-<span class="cstat-no" title="statement not covered" >    switch (dominantIntensity) {</span>
-      case 'High':
-<span class="cstat-no" title="statement not covered" >        return `You prefer high-intensity, dramatic fragrances (${percentage}% of your collection). You love bold, statement scents that make an impact.`;</span>
-      case 'Medium':
-<span class="cstat-no" title="statement not covered" >        return `You gravitate toward medium-intensity, balanced fragrances (${percentage}% of your collection). You appreciate complexity without overwhelming power.`;</span>
-      case 'Light':
-<span class="cstat-no" title="statement not covered" >        return `You favor light, subtle fragrances (${percentage}% of your collection). You prefer delicate, understated elegance in your scents.`;</span>
-      default:
-<span class="cstat-no" title="statement not covered" >        return `Your collection shows a diverse intensity range, suggesting you adapt your fragrance choice to different occasions.`;</span>
+  // Create a profile of user's preferences from their collection
+  static createUserProfile(userCollection) {
+    const allPerfumes = userCollection.getAllPerfumes();
+    <span class="missing-if-branch" title="if path not taken" >I</span>if (allPerfumes.length === 0) {
+<span class="cstat-no" title="statement not covered" >      return { dominantSubcategories: [], signatureNotes: [], intensityPreference: 'Unknown' };</span>
     }
-  }
-  
-  // Suggest complementary subcategories based on current preferences
-<span class="fstat-no" title="function not covered" >  ge</span>tComplementarySubcategories() {
-    const subcategoryAnalysis = <span class="cstat-no" title="statement not covered" >this.analyzeSubcategoryPreferences();</span>
-    const suggestions = <span class="cstat-no" title="statement not covered" >new Set();</span>
     
-    // Find most preferred subcategories and get their complements
-<span class="cstat-no" title="statement not covered" >    Object.keys(subcategoryAnalysis).forEach(<span class="fstat-no" title="function not covered" >fa</span>milyKey =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >      Object.keys(subcategoryAnalysis[familyKey]).forEach(<span class="fstat-no" title="function not covered" >su</span>bcategoryKey =&gt; {</span>
-        const complements = <span class="cstat-no" title="statement not covered" >NoteClassifier.getComplementarySubcategories(subcategoryKey);</span>
-<span class="cstat-no" title="statement not covered" >        complements.forEach(<span class="fstat-no" title="function not covered" >co</span>mplement =&gt; <span class="cstat-no" title="statement not covered" >suggestions.add(complement))</span>;</span>
+    // Analyze subcategory preferences
+    const subcategoryAnalysis = userCollection.analyzeSubcategoryPreferences();
+    const intensityProfile = userCollection.getIntensityProfile();
+    
+    // Find dominant subcategories (appear in 40%+ of collection)
+    const dominantSubcategories = [];
+    const threshold = Math.max(1, Math.ceil(allPerfumes.length * 0.4)); // At least 40% or minimum 1
+    
+    Object.keys(subcategoryAnalysis).forEach(familyKey =&gt; {
+      Object.keys(subcategoryAnalysis[familyKey]).forEach(subcategoryKey =&gt; {
+        const count = subcategoryAnalysis[familyKey][subcategoryKey].count;
+        if (count &gt;= threshold) {
+          dominantSubcategories.push(subcategoryKey);
+        }
       });
     });
     
-<span class="cstat-no" title="statement not covered" >    return Array.from(suggestions);</span>
-  }
-  
-  // Find perfumes with specific subcategory characteristics
-<span class="fstat-no" title="function not covered" >  ge</span>tPerfumesBySubcategory(familyKey, subcategoryKey) {
-    const targetNotes = <span class="cstat-no" title="statement not covered" >NoteClassifier.getNotesInSubcategory(familyKey, subcategoryKey);</span>
+    // Find signature notes (appear in 30%+ of collection)
+    const noteFrequency = userCollection.getMostPopularNotes();
+    const noteThreshold = Math.max(1, Math.ceil(allPerfumes.length * 0.3));
+    const signatureNotes = noteFrequency
+      .filter(item =&gt; item.count &gt;= noteThreshold)
+      .map(item =&gt; item.note);
     
-<span class="cstat-no" title="statement not covered" >    return this.perfumes.filter(<span class="fstat-no" title="function not covered" >pe</span>rfume =&gt; {</span>
-      const allNotes = <span class="cstat-no" title="statement not covered" >[</span>
-        ...perfume.notes.top,
-        ...perfume.notes.middle,
-        ...perfume.notes.base
-      ];
-      
-<span class="cstat-no" title="statement not covered" >      return allNotes.some(<span class="fstat-no" title="function not covered" >no</span>te =&gt; </span>
-<span class="cstat-no" title="statement not covered" >        targetNotes.some(<span class="fstat-no" title="function not covered" >ta</span>rgetNote =&gt; </span>
-<span class="cstat-no" title="statement not covered" >          targetNote.toLowerCase() === note.toLowerCase()</span>
-        )
-      );
-    });
+    return {
+      dominantSubcategories: dominantSubcategories,
+      signatureNotes: signatureNotes,
+      intensityPreference: intensityProfile.dominantIntensity,
+      collectionSize: allPerfumes.length,
+      familyDistribution: userCollection.getFamilyDistribution()
+    };
   }
-&nbsp;
   
+  // Calculate how well a candidate matches the user's collection style
+  static calculateCollectionMatchScore(candidate, userProfile) {
+    let score = 0;
+    let maxPossibleScore = 0;
+    const reasoning = [];
+    
+    // Get candidate's characteristics
+    const candidateNotes = this.getAllNotes(candidate);
+    const candidateSubcategories = this.getDominantSubcategories(candidateNotes);
+    
+    // 1. SUBCATEGORY MATCH SCORING (40% of total score)
+    let subcategoryMatches = 0;
+    userProfile.dominantSubcategories.forEach(userSubcat =&gt; {
+      if (candidateSubcategories.includes(userSubcat)) {
+        subcategoryMatches++;
+        reasoning.push(`Matches your ${userSubcat} preference`);
+      }
+    });
+    
+    <span class="missing-if-branch" title="else path not taken" >E</span>if (userProfile.dominantSubcategories.length &gt; 0) {
+      score += (subcategoryMatches / userProfile.dominantSubcategories.length) * 0.4;
+      maxPossibleScore += 0.4;
+    }
+    
+    // 2. SIGNATURE NOTE BONUS (30% of total score)
+    let signatureNoteMatches = 0;
+    userProfile.signatureNotes.forEach(signatureNote =&gt; {
+      if (candidateNotes.some(note =&gt; note.toLowerCase() === signatureNote.toLowerCase())) {
+        signatureNoteMatches++;
+        reasoning.push(`Contains your signature note: ${signatureNote}`);
+      }
+    });
+    
+    <span class="missing-if-branch" title="else path not taken" >E</span>if (userProfile.signatureNotes.length &gt; 0) {
+      score += (signatureNoteMatches / userProfile.signatureNotes.length) * 0.3;
+      maxPossibleScore += 0.3;
+    }
+    
+    // 3. INTENSITY COMPATIBILITY (20% of total score)
+    const candidateIntensity = this.determinePerfumeIntensity(candidate);
+    if (candidateIntensity === userProfile.intensityPreference) {
+      score += 0.2;
+      reasoning.push(`Matches your ${userProfile.intensityPreference} intensity preference`);
+    }
+    maxPossibleScore += 0.2;
+    
+    // 4. COMPLEMENTARY EXPANSION (10% of total score)
+    const complementaryMatch = this.findComplementaryMatches(candidateSubcategories, userProfile.dominantSubcategories);
+    if (complementaryMatch.found) {
+      score += 0.1;
+      reasoning.push(`Complements your style: ${complementaryMatch.reason}`);
+    }
+    maxPossibleScore += 0.1;
+    
+    // Normalize score to 0-1 scale
+    const normalizedScore = maxPossibleScore &gt; 0 ? score / maxPossibleScore : <span class="branch-1 cbranch-no" title="branch not covered" >0;</span>
+    
+    return {
+      score: Math.round(normalizedScore * 100) / 100,
+      reasoning: reasoning.length &gt; 0 ? reasoning : ['Different style - might offer nice variety!']
+    };
+  }
   
+  // Helper: Determine a perfume's overall intensity
+  static determinePerfumeIntensity(perfume) {
+    const notes = this.getAllNotes(perfume);
+    const intensityAnalysis = NoteClassifier.analyzeIntensityProfile(notes);
+    
+    // Find dominant intensity
+    let dominantIntensity = 'Medium'; // default
+    let maxCount = 0;
+    
+    Object.entries(intensityAnalysis).forEach(([intensity, count]) =&gt; {
+      if (count &gt; maxCount &amp;&amp; intensity !== 'Unknown') {
+        maxCount = count;
+        dominantIntensity = intensity;
+      }
+    });
+    
+    return dominantIntensity;
+  }
+  
+  // Helper: Find complementary relationships
+  static findComplementaryMatches(candidateSubcategories, userSubcategories) {
+    for (const userSubcat of userSubcategories) {
+      const complements = NoteClassifier.getComplementarySubcategories(userSubcat);
+      for (const candidateSubcat of candidateSubcategories) {
+        if (complements.includes(candidateSubcat)) {
+          return {
+            found: true,
+            reason: `${candidateSubcat} complements your ${userSubcat} style`
+          };
+        }
+      }
+    }
+    return { found: false };
+  }
 }
 &nbsp;
-&nbsp;
     
 &nbsp;
-module.exports = { UserCollection };
-&nbsp;
-&nbsp;</pre></td></tr></table></pre>
+module.exports = { RecommendationEngine };</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
             </div><!-- /wrapper -->
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-07-26T17:13:57.370Z
+                at 2025-07-26T19:32:28.877Z
             </div>
-        <script src="prettify.js"></script>
+        <script src="../prettify.js"></script>
         <script>
             window.onload = function () {
                 prettyPrint();
             };
         </script>
-        <script src="sorter.js"></script>
-        <script src="block-navigation.js"></script>
+        <script src="../sorter.js"></script>
+        <script src="../block-navigation.js"></script>
     </body>
 </html>
     
