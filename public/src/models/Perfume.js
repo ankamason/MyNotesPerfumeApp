@@ -31,4 +31,4 @@ class Perfume {
   }
 }
 
-export { Perfume };
+module.exports = { Perfume };

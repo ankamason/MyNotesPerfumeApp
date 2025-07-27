@@ -322,4 +322,4 @@ static parseNotesList(notesString) {
   }
 }
 
-  export {GoogleFragranceSearchService };
+module.exports = { GoogleFragranceSearchService };

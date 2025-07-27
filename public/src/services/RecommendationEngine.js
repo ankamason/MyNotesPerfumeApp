@@ -310,4 +310,4 @@ class RecommendationEngine {
 
     
 
-  export { RecommendationEngine };
+module.exports = { RecommendationEngine };

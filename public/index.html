@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyNotes Personal Perfume App</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Theme Toggle -->
+    <div class="theme-toggle">
+        <button id="theme-btn" class="theme-btn">
+            <span class="theme-icon">🌙</span>
+        </button>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Hero Section -->
+        <header class="hero">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    <span class="gradient-text">MyNotes Personal Perfume App</span>
+                </h1>
+                <p class="hero-subtitle">
+                    Discover your perfect scent with MyNotes Personal Perfume App
+                </p>
+            </div>
+        </header>
+
+        <!-- Search Section -->
+        <section class="search-section">
+            <div class="search-container">
+                <div class="search-box">
+                    <div class="search-input-wrapper">
+                        <input 
+                            type="text" 
+                            id="search-input" 
+                            class="search-input" 
+                            placeholder="Search for any perfume..."
+                            autocomplete="off"
+                        >
+                        <button id="search-btn" class="search-btn">
+                            <span class="search-icon">🔍</span>
+                        </button>
+                    </div>
+                    <div class="search-suggestions">
+                        <span class="suggestion-label">Try:</span>
+                        <button class="suggestion-chip" data-query="Chanel No. 5">Chanel No. 5</button>
+                        <button class="suggestion-chip" data-query="Tom Ford Black Orchid">Black Orchid</button>
+                        <button class="suggestion-chip" data-query="Creed Aventus">Aventus</button>
+                        <button class="suggestion-chip" data-query="Chanel">All Chanel</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Search Results -->
+        <section id="search-results" class="search-results hidden">
+            <h2 class="section-title">Search Results</h2>
+            <div id="results-container" class="results-container">
+                <!-- Results will be populated by JS -->
+            </div>
+        </section>
+
+        <!-- Collection Section -->
+        <section id="collection-section" class="collection-section">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <span class="section-icon">💎</span>
+                    My Collection
+                    <span id="collection-count" class="count-badge">0</span>
+                </h2>
+                <button id="analyze-btn" class="analyze-btn hidden">
+                    <span>🧠</span>
+                    Analyze My Style
+                </button>
+            </div>
+            <div id="collection-container" class="collection-container">
+                <div class="empty-state">
+                    <div class="empty-icon">🌸</div>
+                    <h3>Start Your Fragrance Journey</h3>
+                    <p>Search for perfumes above to build your collection and discover your unique scent profile.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Analysis Section -->
+        <section id="analysis-section" class="analysis-section hidden">
+            <h2 class="section-title">
+                <span class="section-icon">📊</span>
+                Your Fragrance DNA
+            </h2>
+            <div class="analysis-grid">
+                <!-- Signature Notes -->
+                <div class="analysis-card">
+                    <h3 class="card-title">Signature Notes</h3>
+                    <div id="signature-notes" class="note-tags">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+
+                <!-- Family Distribution -->
+                <div class="analysis-card">
+                    <h3 class="card-title">Style Breakdown</h3>
+                    <div id="family-chart" class="family-chart">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+
+                <!-- Intensity Profile -->
+                <div class="analysis-card">
+                    <h3 class="card-title">Intensity Profile</h3>
+                    <div id="intensity-profile" class="intensity-profile">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Recommendations Section -->
+        <section id="recommendations-section" class="recommendations-section hidden">
+            <h2 class="section-title">
+                <span class="section-icon">✨</span>
+                Perfect For You
+            </h2>
+            <div id="recommendations-container" class="recommendations-container">
+                <!-- Populated by JS -->
+            </div>
+        </section>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="loading-overlay hidden">
+        <div class="loading-spinner">
+            <div class="spinner"></div>
+            <p>Analyzing fragrances...</p>
+        </div>
+    </div>
+
+   <script src="app-simple.js"></script>
+</body>
+</html>

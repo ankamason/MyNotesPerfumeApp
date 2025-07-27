@@ -615,4 +615,4 @@ const NoteClassifier = {
   }
 };
 
-export { NOTE_CATEGORIES, NoteClassifier };
+module.exports = { NOTE_CATEGORIES, NoteClassifier };

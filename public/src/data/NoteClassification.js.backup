@@ -1,5 +1,5 @@
 // src/data/NoteClassification.js
-// Complete Perfume Note Classification System - All 11 Families
+// Essential Perfume Note Classification System - 9 Core Families
 
 const NOTE_CATEGORIES = {
   // 1. CITRUS FAMILY
@@ -38,7 +38,7 @@ const NOTE_CATEGORIES = {
     }
   },
 
-  // 2. FLORAL FAMILY
+  // 2. FLORAL FAMILY - with sophisticated subcategories
   FLORAL: {
     name: 'Floral',
     subcategories: {
@@ -143,78 +143,6 @@ const NOTE_CATEGORIES = {
   },
 
   // 4. SPICY FAMILY
-  SPICY: {
-    name: 'Spicy',
-    subcategories: {
-      WARM_SPICES: {
-        name: 'Warm Spices',
-        character: 'Comforting, cozy, enveloping',
-        intensity: 'Medium to High',
-        notes: [
-          'Cinnamon', 'Nutmeg', 'Cloves', 'Allspice', 'Ginger',
-          'Cardamom', 'Star Anise', 'Vanilla Spice', 'Cassia'
-        ]
-      },
-      
-      HOT_SPICES: {
-        name: 'Hot Spices',
-        character: 'Fiery, intense, attention-grabbing',
-        intensity: 'High',
-        notes: [
-          'Black Pepper', 'Pink Pepper', 'White Pepper', 'Chili',
-          'Cayenne', 'Paprika', 'Red Pepper', 'Szechuan Pepper'
-        ]
-      },
-      
-      EXOTIC_SPICES: {
-        name: 'Exotic Spices',
-        character: 'Complex, mysterious, sophisticated',
-        intensity: 'Medium to High',
-        notes: [
-          'Saffron', 'Turmeric', 'Fenugreek', 'Curry Leaf',
-          'Garam Masala', 'Ras el Hanout', 'Baharat', 'Sumac'
-        ]
-      }
-    }
-  },
-
-  // 5. GREEN NOTES FAMILY
-  GREEN: {
-    name: 'Green Notes',
-    subcategories: {
-      FRESH_GREEN: {
-        name: 'Fresh Green',
-        character: 'Natural, crisp, outdoorsy',
-        intensity: 'Light to Medium',
-        notes: [
-          'Green Leaves', 'Grass', 'Mint', 'Basil', 'Green Stems',
-          'Cut Grass', 'Wet Leaves', 'Spring Air', 'Garden Greens'
-        ]
-      },
-      
-      HERBAL_GREEN: {
-        name: 'Herbal Green',
-        character: 'Aromatic, therapeutic, Mediterranean',
-        intensity: 'Medium',
-        notes: [
-          'Rosemary', 'Thyme', 'Oregano', 'Sage', 'Bay Leaves',
-          'Tarragon', 'Herbes de Provence', 'Wild Herbs', 'Lavender'
-        ]
-      },
-      
-      FOREST_GREEN: {
-        name: 'Forest Green',
-        character: 'Deep, woody, mysterious',
-        intensity: 'Medium to High',
-        notes: [
-          'Pine Needles', 'Fern', 'Moss', 'Ivy', 'Forest Floor',
-          'Tree Bark', 'Conifer', 'Evergreen', 'Wood Sorrel'
-        ]
-      }
-    }
-  },
-
-  // 6. WOODY FAMILY
   WOODY: {
     name: 'Woody',
     subcategories: {
@@ -367,8 +295,7 @@ const NOTE_CATEGORIES = {
       }
     }
   },
-
-  // 10. ALDEHYDE FAMILY
+  // ALDEHYDE FAMILY (distinctive chemical category)
   ALDEHYDE: {
     name: 'Aldehyde',
     subcategories: {
@@ -404,7 +331,7 @@ const NOTE_CATEGORIES = {
     }
   },
 
-  // 11. MUSK FAMILY
+  // MUSK FAMILY (separate from the main 9, but important)
   MUSK: {
     name: 'Musk',
     subcategories: {
@@ -431,7 +358,7 @@ const NOTE_CATEGORIES = {
   }
 };
 
-// Helper functions for working with the classification system
+// Helper functions for working with the 9 essential fragrance families
 const NoteClassifier = {
   
   // Get the 9 main fragrance families
@@ -439,15 +366,6 @@ const NoteClassifier = {
     return [
       'CITRUS', 'FLORAL', 'FRUITY', 'SPICY', 'GREEN', 
       'WOODY', 'AMBER_BALSAMIC', 'GOURMAND', 'MARINE_OZONIC'
-    ];
-  },
-  
-  // Get all families (including aldehydes and musks)
-  getAllFamilies() {
-    return [
-      'CITRUS', 'FLORAL', 'FRUITY', 'SPICY', 'GREEN', 
-      'WOODY', 'AMBER_BALSAMIC', 'GOURMAND', 'MARINE_OZONIC',
-      'ALDEHYDE', 'MUSK'
     ];
   },
   
@@ -594,7 +512,7 @@ const NoteClassifier = {
     return complements[subcategoryKey] || [];
   },
 
-  // Get a summary of all families with descriptions
+  // Get a summary of the 9 main families plus important additional categories
   getMainFamilySummary() {
     return {
       // The Essential 9 Fragrance Families
@@ -612,7 +530,16 @@ const NoteClassifier = {
       ALDEHYDE: 'Soapy, powdery, vintage elegance - the signature of classic perfumery',
       MUSK: 'Skin-like, intimate, foundational - the invisible embrace'
     };
-  }
+  },
+
+  // Get extended family count (9 main + aldehydes + musks = 11 total)
+  getAllFamilies() {
+    return [
+      'CITRUS', 'FLORAL', 'FRUITY', 'SPICY', 'GREEN', 
+      'WOODY', 'AMBER_BALSAMIC', 'GOURMAND', 'MARINE_OZONIC',
+      'ALDEHYDE', 'MUSK'
+    ];
+  },
 };
 
-export { NOTE_CATEGORIES, NoteClassifier };
+module.exports = { NOTE_CATEGORIES, NoteClassifier };
