@@ -1,9 +1,12 @@
-// src/services/GoogleFragranceSearchService.js
+// src/services/GoogleFragranceSearchService.js - NOW WITH REAL GOOGLE SEARCH!
+
+import { CONFIG } from '../../config.js';
 
 class GoogleFragranceSearchService {
   
-  // Comprehensive mock database with popular perfumes
+  // Your existing mock database as fallback
   static mockFragranceDatabase = [
+    // ... keep your existing mock data as fallback
     {
       id: 'chanel-no5',
       name: 'Chanel No. 5',
@@ -15,235 +18,227 @@ class GoogleFragranceSearchService {
       },
       fragranceFamily: 'Floral',
       year: 1921,
-      source: 'fragrantica.com',
-      description: 'The world\'s most iconic perfume, a floral bouquet with aldehydic sparkle.'
-    },
-    
-    {
-      id: 'tom-ford-black-orchid',
-      name: 'Black Orchid',
-      brand: 'Tom Ford',
-      notes: {
-        top: ['Truffle', 'Gardenia', 'Black Currant', 'Ylang Ylang'],
-        middle: ['Orchid', 'Spicy Notes', 'Fruity Notes', 'Lotus Wood'],
-        base: ['Patchouli', 'Vanilla', 'Incense', 'Sandalwood']
-      },
-      fragranceFamily: 'Oriental',
-      year: 2006,
-      source: 'fragrantica.com',
-      description: 'A luxurious oriental fragrance with dark, mysterious allure.'
-    },
-    
-    {
-      id: 'creed-aventus',
-      name: 'Aventus',
-      brand: 'Creed',
-      notes: {
-        top: ['Pineapple', 'Bergamot', 'Black Currant', 'Apple'],
-        middle: ['Rose', 'Dry Birch', 'Moroccan Jasmine', 'Patchouli'],
-        base: ['Oak Moss', 'Musk', 'Ambergris', 'Vanilla']
-      },
-      fragranceFamily: 'Woody',
-      year: 2010,
-      source: 'fragrantica.com',
-      description: 'A sophisticated woody fragrance inspired by Napoleon\'s strength.'
-    },
-    
-    {
-      id: 'dior-sauvage',
-      name: 'Sauvage',
-      brand: 'Dior',
-      notes: {
-        top: ['Calabrian Bergamot', 'Pepper'],
-        middle: ['Sichuan Pepper', 'Lavender', 'Pink Pepper', 'Vetiver'],
-        base: ['Ambroxan', 'Cedar', 'Labdanum']
-      },
-      fragranceFamily: 'Woody',
-      year: 2015,
-      source: 'fragrantica.com',
-      description: 'A radically fresh composition with woody and spicy accords.'
-    },
-    
-    {
-      id: 'chanel-coco-mademoiselle',
-      name: 'Coco Mademoiselle',
-      brand: 'Chanel',
-      notes: {
-        top: ['Orange', 'Mandarin Orange', 'Orange Blossom', 'Bergamot'],
-        middle: ['Mimosa', 'Jasmine', 'Turkish Rose', 'Ylang Ylang'],
-        base: ['White Musk', 'Opoponax', 'Tonka Bean', 'Patchouli']
-      },
-      fragranceFamily: 'Floral',
-      year: 2001,
-      source: 'fragrantica.com',
-      description: 'A spirited, voluptuous fragrance with a floral heart and woody base.'
-    },
-    
-    {
-      id: 'ysl-libre',
-      name: 'Libre',
-      brand: 'Yves Saint Laurent',
-      notes: {
-        top: ['Mandarin Orange', 'Black Currant', 'Petitgrain'],
-        middle: ['Jasmine', 'Orange Blossom', 'Lavender'],
-        base: ['Madagascar Vanilla', 'Ambergris', 'Cedar', 'Musk']
-      },
-      fragranceFamily: 'Floral',
-      year: 2019,
-      source: 'fragrantica.com',
-      description: 'The tension between a burning floral bouquet and a masculine lavender.'
-    },
-
-    // Add these to your mockFragranceDatabase array:
-
-{
-  id: 'rose-de-mai',
-  name: 'Rose de Mai',
-  brand: 'L\'Artisan Parfumeur',
-  notes: {
-    top: ['Rose', 'Pink Pepper'],
-    middle: ['Rose Petals', 'Peony'],
-    base: ['White Musk', 'Cedar']
-  },
-  fragranceFamily: 'Floral',
-  year: 2005,
-  source: 'fragrantica.com',
-  description: 'A pure rose fragrance capturing the essence of May roses.'
-},
-
-{
-  id: 'rose-oud',
-  name: 'Rose Oud',
-  brand: 'Maison Francis Kurkdjian',
-  notes: {
-    top: ['Rose', 'Saffron'],
-    middle: ['Damascus Rose', 'Oud'],
-    base: ['Rose Wood', 'Amber']
-  },
-  fragranceFamily: 'Oriental',
-  year: 2014,
-  source: 'fragrantica.com',
-  description: 'An opulent blend of rose and oud.'
-}
-       
-    // Add more popular perfumes as needed...
+      source: 'mock-data'
+    }
+    // ... add your other mock perfumes
   ];
   
-  // Main search method - handles both string and object queries
-  static async searchPerfume(query) {
-    // Simulate API delay
-    await new Promise(resolve => setTimeout(resolve, 200));
+  // Main search method - NOW USES REAL GOOGLE API!
+  static async searchPerfume(query, useRealAPI = true) {
+    console.log('🔍 Searching for:', query);
     
-    let searchName, searchBrand;
-    
-    // Handle different query formats
-    if (typeof query === 'string') {
-      searchName = query;
-      searchBrand = null;
-    } else {
-      searchName = query.name;
-      searchBrand = query.brand;
+    if (!query || !useRealAPI) {
+      // Fallback to mock data
+      return this.searchMockData(query);
     }
     
-    // Search the mock database
-    const results = this.mockFragranceDatabase
-      .map(perfume => ({
-        ...perfume,
-        confidence: this.calculateMatchConfidence(perfume, searchName, searchBrand)
-      }))
-      .filter(perfume => perfume.confidence > 0)
-      .sort((a, b) => b.confidence - a.confidence)
-      .slice(0, 5); // Return top 5 matches
-    
-    return results;
-  }
-  
- static calculateMatchConfidence(perfume, searchName, searchBrand) {
-  let confidence = 0;
-  
-  const perfumeName = perfume.name.toLowerCase();
-  const perfumeBrand = perfume.brand.toLowerCase();
-  const queryName = searchName.toLowerCase();
-  const queryBrand = searchBrand ? searchBrand.toLowerCase() : null;
-  
-  // Name matching logic
-  if (perfumeName === queryName) {
-    confidence += 0.6; // Exact name match
-  } else if (perfumeName.includes(queryName) || queryName.includes(perfumeName)) {
-    confidence += 0.4; // Partial name match
-  } else if (this.fuzzyMatch(perfumeName, queryName)) {
-    confidence += 0.3; // Fuzzy match (typos, etc.)
-  }
-  
-  // NEW: Also check if the search term matches the brand name (when no specific brand provided)
-  if (!queryBrand) {
-    // When no specific brand is provided, check if search term matches brand
-    if (perfumeBrand === queryName) {
-      confidence += 0.5; // Exact brand match
-    } else if (perfumeBrand.includes(queryName) || queryName.includes(perfumeBrand)) {
-      confidence += 0.3; // Partial brand match
+    try {
+      // 🚀 REAL GOOGLE SEARCH!
+      const googleResults = await this.googleCustomSearch(query);
+      const parsedPerfumes = this.parseGoogleResults(googleResults, query);
+      
+      if (parsedPerfumes.length > 0) {
+        console.log('✅ Found', parsedPerfumes.length, 'perfumes via Google API');
+        return parsedPerfumes;
+      } else {
+        console.log('⚠️ No Google results, falling back to mock data');
+        return this.searchMockData(query);
+      }
+      
+    } catch (error) {
+      console.error('❌ Google API error, falling back to mock data:', error);
+      return this.searchMockData(query);
     }
   }
   
-  // Brand matching logic (when specific brand IS provided)
-  if (queryBrand) {
-    if (perfumeBrand === queryBrand) {
-      confidence += 0.4; // Exact brand match
-    } else if (perfumeBrand.includes(queryBrand) || queryBrand.includes(perfumeBrand)) {
-      confidence += 0.2; // Partial brand match
+  // Real Google Custom Search API call
+  static async googleCustomSearch(query) {
+    const searchUrl = new URL(CONFIG.GOOGLE_CUSTOM_SEARCH_URL);
+    
+    // Build search query targeting perfume information
+    const perfumeQuery = `${query} perfume fragrance notes "top notes" "base notes"`;
+    
+    searchUrl.searchParams.append('key', CONFIG.GOOGLE_API_KEY);
+    searchUrl.searchParams.append('cx', CONFIG.GOOGLE_SEARCH_ENGINE_ID);
+    searchUrl.searchParams.append('q', perfumeQuery);
+    searchUrl.searchParams.append('num', '10'); // Get up to 10 results
+    
+    console.log('🌐 Making Google API call...');
+    
+    const response = await fetch(searchUrl.toString());
+    
+    if (!response.ok) {
+      throw new Error(`Google API error: ${response.status} ${response.statusText}`);
     }
-  } else if (confidence > 0) {
-    // Small bonus for having any match when no brand specified
-    confidence += 0.1;
+    
+    const data = await response.json();
+    console.log('📊 Google API response:', data);
+    
+    return data;
   }
   
-  return Math.min(confidence, 1.0);
-}
-  
-  // Simple fuzzy matching for typos
-  static fuzzyMatch(str1, str2) {
-    const distance = this.levenshteinDistance(str1, str2);
-    const maxLength = Math.max(str1.length, str2.length);
-    return distance <= maxLength * 0.3; // Allow 30% character differences
+  // Parse Google search results into perfume objects
+  static parseGoogleResults(googleData, originalQuery) {
+    if (!googleData.items || googleData.items.length === 0) {
+      return [];
+    }
+    
+    const perfumes = [];
+    
+    googleData.items.forEach((item, index) => {
+      try {
+        const perfume = this.extractPerfumeFromSearchResult(item, originalQuery, index);
+        if (perfume) {
+          perfumes.push(perfume);
+        }
+      } catch (error) {
+        console.warn('⚠️ Could not parse search result:', error);
+      }
+    });
+    
+    return perfumes;
   }
   
-  // Calculate edit distance between strings
-  static levenshteinDistance(str1, str2) {
-    const matrix = [];
+  // Extract perfume information from a single Google search result
+  static extractPerfumeFromSearchResult(searchResult, originalQuery, index) {
+    const title = searchResult.title || '';
+    const snippet = searchResult.snippet || '';
+    const url = searchResult.link || '';
     
-    for (let i = 0; i <= str2.length; i++) {
-      matrix[i] = [i];
+    // Try to extract perfume name and brand from title
+    const perfumeInfo = this.extractNameAndBrand(title, originalQuery);
+    
+    if (!perfumeInfo.name) {
+      return null; // Skip if we can't extract basic info
     }
     
-    for (let j = 0; j <= str1.length; j++) {
-      matrix[0][j] = j;
-    }
+    // Extract notes from snippet
+    const notes = this.extractNotesFromText(snippet);
     
-    for (let i = 1; i <= str2.length; i++) {
-      for (let j = 1; j <= str1.length; j++) {
-        if (str2.charAt(i - 1) === str1.charAt(j - 1)) {
-          matrix[i][j] = matrix[i - 1][j - 1];
-        } else {
-          matrix[i][j] = Math.min(
-            matrix[i - 1][j - 1] + 1,
-            matrix[i][j - 1] + 1,
-            matrix[i - 1][j] + 1
-          );
+    // Extract fragrance family
+    const family = this.extractFragranceFamily(snippet + ' ' + title);
+    
+    // Generate confidence score based on how well it matches
+    const confidence = this.calculateGoogleResultConfidence(perfumeInfo, originalQuery, notes);
+    
+    return {
+      id: `google-${Date.now()}-${index}`,
+      name: perfumeInfo.name,
+      brand: perfumeInfo.brand,
+      notes: notes.top.length > 0 || notes.middle.length > 0 || notes.base.length > 0 ? notes : {
+        top: ['Information not available'],
+        middle: ['Check source for details'],
+        base: ['See original listing']
+      },
+      fragranceFamily: family || 'Unclassified',
+      source: 'google-search',
+      sourceUrl: url,
+      confidence: confidence,
+      description: snippet.substring(0, 200) + '...'
+    };
+  }
+  
+  // Extract perfume name and brand from search result title
+  static extractNameAndBrand(title, query) {
+    // Common patterns in fragrance search results
+    const patterns = [
+      // "Perfume Name by Brand Name"
+      /^(.+?)\s+by\s+(.+?)(?:\s*[-|]|$)/i,
+      // "Brand Name Perfume Name"
+      /^([A-Z][a-zA-Z\s&]+?)\s+([A-Z].+?)(?:\s*[-|]|$)/i,
+      // "Perfume Name - Brand Name"
+      /^(.+?)\s*[-–]\s*(.+?)(?:\s*[-|]|$)/i,
+      // Fallback - use query as name
+      new RegExp(`(${query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'i')
+    ];
+    
+    for (const pattern of patterns) {
+      const match = title.match(pattern);
+      if (match) {
+        if (match.length >= 3) {
+          return {
+            name: match[1].trim(),
+            brand: match[2].trim()
+          };
+        } else if (match.length >= 2) {
+          return {
+            name: match[1].trim(),
+            brand: 'Unknown Brand'
+          };
         }
       }
     }
     
-    return matrix[str2.length][str1.length];
+    // Ultimate fallback
+    return {
+      name: query,
+      brand: 'Search Result'
+    };
   }
   
-  // Extract notes from natural language text (for future Google API integration)
+  // Calculate confidence for Google search results
+  static calculateGoogleResultConfidence(perfumeInfo, originalQuery, notes) {
+    let confidence = 0.3; // Base confidence for Google results
+    
+    const queryLower = originalQuery.toLowerCase();
+    const nameLower = perfumeInfo.name.toLowerCase();
+    const brandLower = perfumeInfo.brand.toLowerCase();
+    
+    // Name matching
+    if (nameLower.includes(queryLower) || queryLower.includes(nameLower)) {
+      confidence += 0.4;
+    }
+    
+    // Brand matching  
+    if (brandLower.includes(queryLower) || queryLower.includes(brandLower)) {
+      confidence += 0.2;
+    }
+    
+    // Has detailed notes information
+    if (notes.top.length > 0 && notes.middle.length > 0 && notes.base.length > 0) {
+      confidence += 0.1;
+    }
+    
+    return Math.min(confidence, 1.0);
+  }
+  
+  // Fallback to mock data (your existing method)
+  static async searchMockData(query) {
+    if (!query) return this.mockFragranceDatabase.slice(0, 6);
+    
+    // Your existing mock search logic
+    const queryLower = query.toLowerCase();
+    
+    return this.mockFragranceDatabase
+      .map(perfume => ({
+        ...perfume,
+        confidence: this.calculateMockConfidence(perfume, query)
+      }))
+      .filter(perfume => perfume.confidence > 0)
+      .sort((a, b) => b.confidence - a.confidence);
+  }
+  
+  static calculateMockConfidence(perfume, query) {
+    // Your existing confidence calculation for mock data
+    let confidence = 0;
+    const queryLower = query.toLowerCase();
+    
+    if (perfume.name.toLowerCase().includes(queryLower)) confidence += 0.6;
+    if (perfume.brand.toLowerCase().includes(queryLower)) confidence += 0.4;
+    
+    return confidence;
+  }
+  
+  // Your existing helper methods (keep these)
   static extractNotesFromText(text) {
     const notes = { top: [], middle: [], base: [] };
     
-    // Regular expressions for different formats
+    // Enhanced patterns for real web content
     const patterns = {
-      structured: /Top notes?:\s*([^;]+);\s*Middle notes?:\s*([^;]+);\s*Base notes?:\s*([^;.]+)/i,
-      narrative: /Opens with\s+([^.]+)\.\s*Heart of\s+([^.]+)\.\s*Dries down to\s+([^.]+)\./i
+      structured: /(?:top|head)\s*notes?[:\s]+([^;.]+)[;.]?\s*(?:middle|heart)\s*notes?[:\s]+([^;.]+)[;.]?\s*(?:base|dry\s*down)\s*notes?[:\s]+([^;.]+)/i,
+      topOnly: /(?:top|head)\s*notes?[:\s]+([^;.]+)/i,
+      heartOnly: /(?:middle|heart)\s*notes?[:\s]+([^;.]+)/i,
+      baseOnly: /(?:base|dry\s*down)\s*notes?[:\s]+([^;.]+)/i
     };
     
     // Try structured format first
@@ -255,65 +250,62 @@ class GoogleFragranceSearchService {
       return notes;
     }
     
-    // Try narrative format
-    match = text.match(patterns.narrative);
-    if (match) {
-      notes.top = this.parseNotesList(match[1]);
-      notes.middle = this.parseNotesList(match[2]);
-      notes.base = this.parseNotesList(match[3]);
-      return notes;
-    }
+    // Try individual patterns
+    match = text.match(patterns.topOnly);
+    if (match) notes.top = this.parseNotesList(match[1]);
     
-    // Return empty structure if no patterns match
+    match = text.match(patterns.heartOnly);
+    if (match) notes.middle = this.parseNotesList(match[1]);
+    
+    match = text.match(patterns.baseOnly);
+    if (match) notes.base = this.parseNotesList(match[1]);
+    
     return notes;
   }
   
-  // Replace the parseNotesList method:
-
-static parseNotesList(notesString) {
-  // Handle different formats: "rose, jasmine, lily" or "rose and jasmine"
-  let notes;
-  
-  if (notesString.includes(',')) {
-    // Comma-separated format
-    notes = notesString.split(',');
-  } else if (notesString.includes(' and ')) {
-    // "and" separated format
-    notes = notesString.split(' and ');
-  } else {
-    // Single note or space-separated
-    notes = [notesString];
+  static parseNotesList(notesString) {
+    if (!notesString) return [];
+    
+    // Handle different separators
+    let notes;
+    if (notesString.includes(',')) {
+      notes = notesString.split(',');
+    } else if (notesString.includes(' and ')) {
+      notes = notesString.split(' and ');
+    } else if (notesString.includes(';')) {
+      notes = notesString.split(';');
+    } else {
+      notes = [notesString];
+    }
+    
+    return notes
+      .map(note => note.trim())
+      .filter(note => note.length > 0 && note.length < 30) // Filter out overly long "notes"
+      .map(note => note.replace(/^(a |an |the )/i, ''))
+      .slice(0, 8); // Limit to reasonable number of notes
   }
   
-  return notes
-    .map(note => note.trim())
-    .filter(note => note.length > 0)
-    .map(note => note.replace(/^(a |an |the )/i, '')); // Remove articles
-}
-  
-  // Extract fragrance family from description text
   static extractFragranceFamily(text) {
     const familyKeywords = {
-      'Floral': ['floral', 'flower', 'rose', 'jasmine', 'lily', 'peony'],
-      'Woody': ['woody', 'wood', 'cedar', 'sandalwood', 'vetiver'],
-      'Citrus': ['citrus', 'fresh', 'lemon', 'bergamot', 'orange'],
-      'Oriental': ['oriental', 'spicy', 'amber', 'vanilla', 'exotic'],
-      'Gourmand': ['gourmand', 'sweet', 'chocolate', 'caramel', 'honey'],
-      'Aquatic': ['aquatic', 'marine', 'ocean', 'sea', 'water'],
-      'Green': ['green', 'herbal', 'grass', 'mint', 'basil']
+      'Floral': ['floral', 'flower', 'rose', 'jasmine', 'lily', 'peony', 'gardenia'],
+      'Woody': ['woody', 'wood', 'cedar', 'sandalwood', 'vetiver', 'oud'],
+      'Citrus': ['citrus', 'fresh', 'lemon', 'bergamot', 'orange', 'grapefruit'],
+      'Oriental': ['oriental', 'spicy', 'amber', 'vanilla', 'exotic', 'incense'],
+      'Gourmand': ['gourmand', 'sweet', 'chocolate', 'caramel', 'honey', 'vanilla'],
+      'Fresh': ['fresh', 'aquatic', 'marine', 'ocean', 'sea', 'water', 'clean'],
+      'Green': ['green', 'herbal', 'grass', 'mint', 'basil', 'leaves'],
+      'Chypre': ['chypre', 'mossy', 'oakmoss', 'patchouli']
     };
     
     const lowerText = text.toLowerCase();
-    
-    // Score each family based on keyword matches
     const scores = {};
+    
     Object.entries(familyKeywords).forEach(([family, keywords]) => {
       scores[family] = keywords.reduce((score, keyword) => {
         return score + (lowerText.includes(keyword) ? 1 : 0);
       }, 0);
     });
     
-    // Return family with highest score, or 'Unclassified' if no matches
     const bestFamily = Object.keys(scores).reduce((a, b) => 
       scores[a] > scores[b] ? a : b
     );
@@ -322,4 +314,4 @@ static parseNotesList(notesString) {
   }
 }
 
-module.exports = { GoogleFragranceSearchService };
+export { GoogleFragranceSearchService };

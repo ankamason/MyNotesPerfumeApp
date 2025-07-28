@@ -1,6 +1,6 @@
 // src/services/RecommendationEngine.js
 
-const { NoteClassifier } = require('../data/NoteClassification.js');
+import { NoteClassifier } from '../data/NoteClassification.js';
 
 class RecommendationEngine {
   
@@ -310,4 +310,4 @@ class RecommendationEngine {
 
     
 
-module.exports = { RecommendationEngine };
+export { RecommendationEngine };

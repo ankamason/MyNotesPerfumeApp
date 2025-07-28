@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>API Test</title>
+</head>
+<body>
+    <h1>Google API Test</h1>
+    <button onclick="testAPI()">Test Search API</button>
+    <div id="results"></div>
+
+    <script type="module">
+        import { CONFIG } from './config.js';
+
+        window.testAPI = async function() {
+            const query = 'Chanel No 5 perfume';
+            const url = `${CONFIG.GOOGLE_CUSTOM_SEARCH_URL}?key=${CONFIG.GOOGLE_API_KEY}&cx=${CONFIG.GOOGLE_SEARCH_ENGINE_ID}&q=${query}`;
+            
+            console.log('Testing API with URL:', url);
+            
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+                
+                console.log('API Response:', data);
+                document.getElementById('results').innerHTML = 
+                    `<pre>${JSON.stringify(data, null, 2)}</pre>`;
+                    
+            } catch (error) {
+                console.error('API Error:', error);
+                document.getElementById('results').innerHTML = 
+                    `<p style="color: red;">Error: ${error.message}</p>`;
+            }
+        }
+    </script>
+</body>
+</html>

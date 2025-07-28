@@ -1,6 +1,7 @@
 // src/models/UserCollection.js
 
-const { NoteClassifier } = require('../data/NoteClassification.js');  // ← ADD THIS LINE
+import { NoteClassifier } from '../data/NoteClassification.js';
+  // ← ADD THIS LINE
 
 class UserCollection {
   constructor() {
@@ -269,5 +270,5 @@ class UserCollection {
 
     
 
-module.exports = { UserCollection };
+export { UserCollection };
 
