@@ -67,18 +67,24 @@
         </section>
 
         <!-- Collection Section -->
-        <section id="collection-section" class="collection-section">
-            <div class="section-header">
-                <h2 class="section-title">
-                    <span class="section-icon">💎</span>
-                    My Collection
-                    <span id="collection-count" class="count-badge">0</span>
-                </h2>
-                <button id="analyze-btn" class="analyze-btn hidden">
-                    <span>🧠</span>
-                    Analyze My Style
-                </button>
-            </div>
+         <div class="section-header">
+    <h2 class="section-title">
+        <span class="section-icon">💎</span>
+        My Collection
+        <span id="collection-count" class="count-badge">0</span>
+    </h2>
+    <div class="collection-actions">
+        <button id="add-manual-btn" class="btn btn-secondary manual-add-btn">
+            <span>✨</span>
+            Add Manually
+        </button>
+        <button id="analyze-btn" class="btn btn-secondary manual-add-btn hidden">
+        <span>🧠</span>
+        Analyze My Style
+        </button>
+    </div>
+</div>
+         
             <div id="collection-container" class="collection-container">
                 <div class="empty-state">
                     <div class="empty-icon">🌸</div>
@@ -87,6 +93,129 @@
                 </div>
             </div>
         </section>
+
+        <!-- Add this right after the </section> closing tag of collection-section -->
+
+<!-- Manual Entry Modal -->
+<div id="manual-entry-modal" class="modal-overlay hidden">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2 class="modal-title">
+                <span class="modal-icon">✨</span>
+                Add Your Own Perfume
+            </h2>
+            <button id="close-modal-btn" class="close-btn">×</button>
+        </div>
+        
+        <form id="manual-perfume-form" class="manual-form">
+            <!-- Basic Information -->
+            <div class="form-section">
+                <h3 class="section-subtitle">Basic Information</h3>
+                
+                <div class="form-group">
+                    <label for="perfume-name" class="form-label">Perfume Name *</label>
+                    <input 
+                        type="text" 
+                        id="perfume-name" 
+                        class="form-input" 
+                        placeholder="e.g., Santal 33, La Vie Est Belle"
+                        required
+                    >
+                </div>
+                
+                <div class="form-group">
+                    <label for="perfume-brand" class="form-label">Brand *</label>
+                    <input 
+                        type="text" 
+                        id="perfume-brand" 
+                        class="form-input" 
+                        placeholder="e.g., Le Labo, Lancôme, Tom Ford"
+                        required
+                    >
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="fragrance-family" class="form-label">Fragrance Family</label>
+                        <select id="fragrance-family" class="form-select">
+                            <option value="">Select family (optional)</option>
+                            <option value="Floral">Floral</option>
+                            <option value="Woody">Woody</option>
+                            <option value="Oriental">Oriental</option>
+                            <option value="Fresh">Fresh</option>
+                            <option value="Citrus">Citrus</option>
+                            <option value="Gourmand">Gourmand</option>
+                            <option value="Green">Green</option>
+                            <option value="Chypre">Chypre</option>
+                            <option value="Fougère">Fougère</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="perfume-year" class="form-label">Year Released</label>
+                        <input 
+                            type="number" 
+                            id="perfume-year" 
+                            class="form-input" 
+                            placeholder="e.g., 2019"
+                            min="1900"
+                            max="2025"
+                        >
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Notes Information -->
+            <div class="form-section">
+                <h3 class="section-subtitle">Fragrance Notes</h3>
+                <p class="form-help">Separate multiple notes with commas (e.g., "Rose, Jasmine, Bergamot")</p>
+                
+                <div class="form-group">
+                    <label for="top-notes" class="form-label">Top Notes</label>
+                    <input 
+                        type="text" 
+                        id="top-notes" 
+                        class="form-input" 
+                        placeholder="e.g., Bergamot, Lemon, Pink Pepper"
+                    >
+                </div>
+                
+                <div class="form-group">
+                    <label for="middle-notes" class="form-label">Heart/Middle Notes</label>
+                    <input 
+                        type="text" 
+                        id="middle-notes" 
+                        class="form-input" 
+                        placeholder="e.g., Rose, Jasmine, Geranium"
+                    >
+                </div>
+                
+                <div class="form-group">
+                    <label for="base-notes" class="form-label">Base Notes</label>
+                    <input 
+                        type="text" 
+                        id="base-notes" 
+                        class="form-input" 
+                        placeholder="e.g., Sandalwood, Vanilla, Musk"
+                    >
+                </div>
+            </div>
+            
+            <!-- Actions -->
+            <div class="form-actions">
+                <button type="button" id="cancel-btn" class="btn btn-secondary">
+                    <span>❌</span>
+                    Cancel
+                </button>
+                <button type="submit" class="btn btn-primary">
+                    <span>✨</span>
+                    Add to My Collection
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
 
         <!-- Analysis Section -->
         <section id="analysis-section" class="analysis-section hidden">
