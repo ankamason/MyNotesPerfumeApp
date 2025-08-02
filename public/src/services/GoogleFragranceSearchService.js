@@ -1,6 +1,7 @@
 // src/services/GoogleFragranceSearchService.js - Complete & Working Version
 
 import { NoteClassifier } from '../data/NoteClassification.js';
+import { NoteNormalizer } from '../utils/NoteNormalizer.js';
 
 class GoogleFragranceSearchService {
   

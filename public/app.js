@@ -6,6 +6,7 @@ import { UserCollection } from './src/models/UserCollection.js';
 import { Perfume } from './src/models/Perfume.js';
 import { RecommendationEngine } from './src/services/RecommendationEngine.js';
 
+
 class FragranceApp {
   constructor() {
     // Initialize your AI-powered backend

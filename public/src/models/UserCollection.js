@@ -1,7 +1,8 @@
 // src/models/UserCollection.js
 
 import { NoteClassifier } from '../data/NoteClassification.js';
-  // ← ADD THIS LINE
+import { NoteNormalizer } from '../utils/NoteNormalizer.js';
+  
 
 class UserCollection {
   constructor() {
@@ -9,14 +10,17 @@ class UserCollection {
     this.createdAt = new Date();
   }
   
-  // Add a perfume to the collection (with duplicate prevention)
+  // Add a perfume to the collection (with duplicate prevention and note normalization)
   addPerfume(perfume) {
     // Check for duplicates by ID
     if (this.hasPerfume(perfume.id)) {
       return false; // Don't add duplicate
     }
     
-    this.perfumes.push(perfume);
+    // Normalize all notes before adding to collection
+    const normalizedPerfume = NoteNormalizer.normalizePerfumeNotes(perfume);
+    
+    this.perfumes.push(normalizedPerfume);
     return true;
   }
   
@@ -47,18 +51,26 @@ class UserCollection {
     return this.perfumes.filter(perfume => perfume.fragranceFamily === family);
   }
   
-  // Find perfumes containing a specific note (in any position!)
+  // Find perfumes containing a specific note (case-insensitive search)
   getPerfumesWithNote(note) {
+    // Normalize the search note for consistent comparison
+    const normalizedSearchNote = NoteNormalizer.normalize(note);
+    
     return this.perfumes.filter(perfume => {
       const allNotes = [
         ...perfume.notes.top,
         ...perfume.notes.middle,
         ...perfume.notes.base
       ];
-      return allNotes.includes(note);
+      
+      // Case-insensitive comparison
+      return allNotes.some(perfumeNote => 
+        perfumeNote.toLowerCase() === normalizedSearchNote.toLowerCase()
+      );
     });
   }
-    // Get most popular notes across entire collection
+  
+  // Get most popular notes across entire collection
   getMostPopularNotes() {
     const noteCount = {};
     
@@ -71,7 +83,9 @@ class UserCollection {
       ];
       
       allNotes.forEach(note => {
-        noteCount[note] = (noteCount[note] || 0) + 1;
+        // Use normalized note name as the key for counting
+        const normalizedNote = NoteNormalizer.normalize(note);
+        noteCount[normalizedNote] = (noteCount[normalizedNote] || 0) + 1;
       });
     });
     
@@ -145,7 +159,9 @@ class UserCollection {
       ];
       
       allNotes.forEach(note => {
-        const classification = NoteClassifier.classifyNote(note);
+        // Ensure note is normalized before classification
+        const normalizedNote = NoteNormalizer.normalize(note);
+        const classification = NoteClassifier.classifyNote(normalizedNote);
         const familyKey = classification.familyKey;
         const subcategoryKey = classification.subcategoryKey;
         
@@ -157,13 +173,15 @@ class UserCollection {
           subcategoryCount[familyKey][subcategoryKey] = {
             count: 0,
             notes: [],
+            name: classification.subcategory, // Clean display name without underscores
+            family: classification.family, // Clean family display name
             character: classification.character,
             intensity: classification.intensity
           };
         }
         
         subcategoryCount[familyKey][subcategoryKey].count++;
-        subcategoryCount[familyKey][subcategoryKey].notes.push(note);
+        subcategoryCount[familyKey][subcategoryKey].notes.push(normalizedNote);
         totalNotes++;
       });
     });
@@ -187,7 +205,9 @@ class UserCollection {
       allNotes.push(...perfume.notes.top, ...perfume.notes.middle, ...perfume.notes.base);
     });
     
-    const intensityCount = NoteClassifier.analyzeIntensityProfile(allNotes);
+    // Normalize notes before intensity analysis
+    const normalizedNotes = NoteNormalizer.normalizeArray(allNotes);
+    const intensityCount = NoteClassifier.analyzeIntensityProfile(normalizedNotes);
     const total = Object.values(intensityCount).reduce((sum, count) => sum + count, 0);
     
     // Calculate percentages and find dominant intensity
@@ -257,18 +277,115 @@ class UserCollection {
       
       return allNotes.some(note => 
         targetNotes.some(targetNote => 
-          targetNote.toLowerCase() === note.toLowerCase()
+          NoteNormalizer.normalize(targetNote).toLowerCase() === 
+          NoteNormalizer.normalize(note).toLowerCase()
         )
       );
     });
   }
 
+  // Get formatted subcategory data for UI display
+  getFormattedSubcategoryData() {
+    const rawData = this.analyzeSubcategoryPreferences();
+    const formattedData = {};
+    
+    Object.keys(rawData).forEach(familyKey => {
+      formattedData[familyKey] = {};
+      
+      Object.keys(rawData[familyKey]).forEach(subcategoryKey => {
+        const subcategoryData = rawData[familyKey][subcategoryKey];
+        formattedData[familyKey][subcategoryKey] = {
+          ...subcategoryData,
+          displayName: subcategoryData.name, // Use the clean name for display
+          key: subcategoryKey // Keep the original key for internal operations
+        };
+      });
+    });
+    
+    return formattedData;
+  }
   
-  
+  // Get top subcategories across all families (sorted by popularity)
+  getTopSubcategories(limit = 10) {
+    const subcategoryData = this.analyzeSubcategoryPreferences();
+    const allSubcategories = [];
+    
+    Object.keys(subcategoryData).forEach(familyKey => {
+      Object.keys(subcategoryData[familyKey]).forEach(subcategoryKey => {
+        const data = subcategoryData[familyKey][subcategoryKey];
+        allSubcategories.push({
+          familyKey,
+          subcategoryKey,
+          name: data.name, // Clean display name
+          family: data.family, // Clean family name
+          count: data.count,
+          percentage: data.percentage,
+          character: data.character,
+          intensity: data.intensity
+        });
+      });
+    });
+    
+    // Sort by count (descending) and return top results
+    return allSubcategories
+      .sort((a, b) => b.count - a.count)
+      .slice(0, limit);
+  }
+
+  // Normalize all notes in existing collection (one-time cleanup utility)
+  normalizeExistingCollection() {
+    let updatedCount = 0;
+    
+    this.perfumes = this.perfumes.map(perfume => {
+      const originalPerfume = JSON.stringify(perfume);
+      const normalizedPerfume = NoteNormalizer.normalizePerfumeNotes(perfume);
+      
+      if (JSON.stringify(normalizedPerfume) !== originalPerfume) {
+        updatedCount++;
+      }
+      
+      return normalizedPerfume;
+    });
+    
+    return {
+      updated: updatedCount,
+      total: this.perfumes.length,
+      message: `Normalized ${updatedCount} of ${this.perfumes.length} perfumes in collection`
+    };
+  }
+
+  // Validate that all notes in the collection are properly normalized
+  validateNormalization() {
+    const issues = [];
+    
+    this.perfumes.forEach((perfume, index) => {
+      const allNotes = [
+        ...perfume.notes.top,
+        ...perfume.notes.middle,
+        ...perfume.notes.base
+      ];
+      
+      allNotes.forEach((note, noteIndex) => {
+        if (!NoteNormalizer.isProperlyFormatted(note)) {
+          issues.push({
+            perfumeIndex: index,
+            perfumeName: perfume.name,
+            noteIndex: noteIndex,
+            currentNote: note,
+            suggestedNote: NoteNormalizer.normalize(note)
+          });
+        }
+      });
+    });
+    
+    return {
+      isValid: issues.length === 0,
+      issues: issues,
+      message: issues.length === 0 
+        ? 'All notes are properly normalized' 
+        : `Found ${issues.length} notes that need normalization`
+    };
+  }
 }
 
-
-    
-
 export { UserCollection };
-

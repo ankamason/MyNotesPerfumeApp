@@ -1,6 +1,8 @@
 // src/data/NoteClassification.js
 // Complete Perfume Note Classification System - All 11 Families
 
+import { NoteNormalizer } from '../utils/NoteNormalizer.js';
+
 const NOTE_CATEGORIES = {
   // 1. CITRUS FAMILY
   CITRUS: {
@@ -434,11 +436,12 @@ const NOTE_CATEGORIES = {
 // Helper functions for working with the classification system
 const NoteClassifier = {
   
-  // Get the 9 main fragrance families
+  // Get the 11 main fragrance families
   getMainFamilies() {
     return [
       'CITRUS', 'FLORAL', 'FRUITY', 'SPICY', 'GREEN', 
-      'WOODY', 'AMBER_BALSAMIC', 'GOURMAND', 'MARINE_OZONIC'
+      'WOODY', 'AMBER_BALSAMIC', 'GOURMAND', 'MARINE_OZONIC',
+      'MUSK', 'ALDEHYDE'
     ];
   },
   
@@ -451,17 +454,20 @@ const NoteClassifier = {
     ];
   },
   
-  // Check if a family is one of the main 9
+  // Check if a family is one of the main 11
   isMainFamily(familyKey) {
     return this.getMainFamilies().includes(familyKey);
   },
   
-  // Find which category and subcategory a note belongs to
+  // Find which category and subcategory a note belongs to (with normalization)
   classifyNote(noteName) {
+    // Normalize the input note for consistent comparison
+    const normalizedInput = NoteNormalizer.normalize(noteName);
+    
     for (const [familyKey, family] of Object.entries(NOTE_CATEGORIES)) {
       for (const [subKey, subcategory] of Object.entries(family.subcategories)) {
         if (subcategory.notes.some(note => 
-          note.toLowerCase() === noteName.toLowerCase()
+          NoteNormalizer.normalize(note).toLowerCase() === normalizedInput.toLowerCase()
         )) {
           return {
             family: family.name,
@@ -478,15 +484,15 @@ const NoteClassifier = {
     return {
       family: 'Unclassified',
       familyKey: 'UNCLASSIFIED',
-      subcategory: 'Unknown',
-      subcategoryKey: 'UNKNOWN',
-      character: 'Unknown character',
-      intensity: 'Unknown',
+      subcategory: 'Complex',
+      subcategoryKey: 'COMPLEX',
+      character: 'Complex character',
+      intensity: 'Complex',
       isMainFamily: false
     };
   },
 
-  // Get family distribution focusing on the main 9 families
+  // Get family distribution focusing on the main 11 families (with normalization)
   getMainFamilyDistribution(notes) {
     const familyCount = {};
     const mainFamilies = this.getMainFamilies();
@@ -496,8 +502,11 @@ const NoteClassifier = {
       familyCount[family] = 0;
     });
     
+    // Normalize notes before counting
+    const normalizedNotes = NoteNormalizer.normalizeArray(notes);
+    
     // Count notes by main family
-    notes.forEach(note => {
+    normalizedNotes.forEach(note => {
       const classification = this.classifyNote(note);
       if (classification.isMainFamily) {
         familyCount[classification.familyKey]++;
@@ -507,20 +516,23 @@ const NoteClassifier = {
     return familyCount;
   },
 
-  // Get all notes in a specific subcategory
+  // Get all notes in a specific subcategory (returns normalized notes)
   getNotesInSubcategory(familyKey, subcategoryKey) {
-    return NOTE_CATEGORIES[familyKey]?.subcategories[subcategoryKey]?.notes || [];
+    const notes = NOTE_CATEGORIES[familyKey]?.subcategories[subcategoryKey]?.notes || [];
+    return NoteNormalizer.normalizeArray(notes);
   },
 
-  // Find related notes (same subcategory)
+  // Find related notes (same subcategory) with normalization
   findRelatedNotes(noteName) {
-    const classification = this.classifyNote(noteName);
+    const normalizedInput = NoteNormalizer.normalize(noteName);
+    const classification = this.classifyNote(normalizedInput);
+    
     if (classification.familyKey === 'UNCLASSIFIED') return [];
     
     return this.getNotesInSubcategory(
       classification.familyKey, 
       classification.subcategoryKey
-    ).filter(note => note.toLowerCase() !== noteName.toLowerCase());
+    ).filter(note => note.toLowerCase() !== normalizedInput.toLowerCase());
   },
 
   // Get all subcategories for a family
@@ -528,11 +540,14 @@ const NoteClassifier = {
     return NOTE_CATEGORIES[familyKey]?.subcategories || {};
   },
 
-  // Analyze intensity distribution of notes
+  // Analyze intensity distribution of notes (with normalization)
   analyzeIntensityProfile(notes) {
-    const intensityCount = { 'Light': 0, 'Medium': 0, 'High': 0, 'Unknown': 0 };
+    const intensityCount = { 'Light': 0, 'Medium': 0, 'High': 0, 'Complex': 0 };
     
-    notes.forEach(note => {
+    // Normalize notes before analysis
+    const normalizedNotes = NoteNormalizer.normalizeArray(notes);
+    
+    normalizedNotes.forEach(note => {
       const classification = this.classifyNote(note);
       const intensity = classification.intensity.split(' ')[0]; // Handle "Light to Medium"
       intensityCount[intensity] = (intensityCount[intensity] || 0) + 1;
@@ -590,14 +605,14 @@ const NoteClassifier = {
       'CLEAN_MUSKS': ['WHITE_FLOWERS', 'SOFT_AMBER', 'OZONIC_FRESH'],
       'SENSUAL_MUSKS': ['WARM_WOODS', 'RESINOUS_BALSAMIC', 'SPICY']
     };
-    
+
     return complements[subcategoryKey] || [];
   },
 
   // Get a summary of all families with descriptions
   getMainFamilySummary() {
     return {
-      // The Essential 9 Fragrance Families
+      // The Essential 11 Fragrance Families
       CITRUS: 'Bright, fresh, energizing - the sparkling opening of many perfumes',
       FLORAL: 'Romantic, feminine, diverse - from delicate to intoxicating',
       FRUITY: 'Juicy, playful, modern - adding sweetness and vitality',
@@ -607,10 +622,64 @@ const NoteClassifier = {
       AMBER_BALSAMIC: 'Rich, resinous, spiritual - adding warmth and luxury',
       GOURMAND: 'Edible, comforting, indulgent - like dessert in a bottle',
       MARINE_OZONIC: 'Clean, airy, expansive - bringing freshness and space',
-      
-      // Important Additional Categories
       ALDEHYDE: 'Soapy, powdery, vintage elegance - the signature of classic perfumery',
       MUSK: 'Skin-like, intimate, foundational - the invisible embrace'
+    };
+  },
+
+  // Utility: Normalize all notes in the NOTE_CATEGORIES (one-time cleanup)
+  normalizeAllCategoryNotes() {
+    let updatedCount = 0;
+    
+    Object.keys(NOTE_CATEGORIES).forEach(familyKey => {
+      Object.keys(NOTE_CATEGORIES[familyKey].subcategories).forEach(subcategoryKey => {
+        const originalNotes = NOTE_CATEGORIES[familyKey].subcategories[subcategoryKey].notes;
+        const normalizedNotes = NoteNormalizer.normalizeArray(originalNotes);
+        
+        // Check if any notes were actually changed
+        const changed = originalNotes.some((note, index) => 
+          note !== normalizedNotes[index]
+        );
+        
+        if (changed) {
+          NOTE_CATEGORIES[familyKey].subcategories[subcategoryKey].notes = normalizedNotes;
+          updatedCount++;
+        }
+      });
+    });
+    
+    return {
+      updatedSubcategories: updatedCount,
+      message: `Normalized notes in ${updatedCount} subcategories`
+    };
+  },
+
+  // Utility: Check if all notes in categories are properly normalized
+  validateCategoryNormalization() {
+    const issues = [];
+    
+    Object.entries(NOTE_CATEGORIES).forEach(([familyKey, family]) => {
+      Object.entries(family.subcategories).forEach(([subcategoryKey, subcategory]) => {
+        subcategory.notes.forEach((note, noteIndex) => {
+          if (!NoteNormalizer.isProperlyFormatted(note)) {
+            issues.push({
+              family: familyKey,
+              subcategory: subcategoryKey,
+              noteIndex: noteIndex,
+              currentNote: note,
+              suggestedNote: NoteNormalizer.normalize(note)
+            });
+          }
+        });
+      });
+    });
+    
+    return {
+      isValid: issues.length === 0,
+      issues: issues,
+      message: issues.length === 0 
+        ? 'All category notes are properly normalized' 
+        : `Found ${issues.length} notes that need normalization`
     };
   }
 };

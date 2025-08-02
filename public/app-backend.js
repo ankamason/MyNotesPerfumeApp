@@ -2,6 +2,7 @@ import { GoogleFragranceSearchService } from './src/services/GoogleFragranceSear
 import { UserCollection } from './src/models/UserCollection.js';
 import { Perfume } from './src/models/Perfume.js';
 import { RecommendationEngine } from './src/services/RecommendationEngine.js';
+import { NoteNormalizer } from './src/utils/NoteNormalizer.js';
 
 class FragranceAppWithBackend {
   constructor() {
@@ -21,7 +22,8 @@ class FragranceAppWithBackend {
       GoogleFragranceSearchService: !!GoogleFragranceSearchService,
       UserCollection: !!UserCollection,
       Perfume: !!Perfume,
-      RecommendationEngine: !!RecommendationEngine
+      RecommendationEngine: !!RecommendationEngine,
+      NoteNormalizer: !!NoteNormalizer
     });
   }
 
@@ -32,11 +34,21 @@ class FragranceAppWithBackend {
         const perfumesData = JSON.parse(savedPerfumes);
         
         perfumesData.forEach(perfumeData => {
-          const perfume = new Perfume(perfumeData);
+          // Normalize notes when loading from localStorage
+          const normalizedPerfumeData = {
+            ...perfumeData,
+            notes: {
+              top: NoteNormalizer.normalizeArray(perfumeData.notes?.top || []),
+              middle: NoteNormalizer.normalizeArray(perfumeData.notes?.middle || []),
+              base: NoteNormalizer.normalizeArray(perfumeData.notes?.base || [])
+            }
+          };
+          
+          const perfume = new Perfume(normalizedPerfumeData);
           this.userCollection.addPerfume(perfume);
         });
         
-        console.log(`🔄 Loaded ${perfumesData.length} perfumes from localStorage`);
+        console.log(`🔄 Loaded and normalized ${perfumesData.length} perfumes from localStorage`);
       }
     } catch (error) {
       console.error('Error loading collection from localStorage:', error);
@@ -202,7 +214,7 @@ class FragranceAppWithBackend {
     
     const perfumeData = this.extractPerfumeFromForm();
     
-    console.log('📋 Manual perfume data:', perfumeData);
+    console.log('📋 Manual perfume data (before normalization):', perfumeData);
     
     if (!perfumeData.name.trim() || !perfumeData.brand.trim()) {
       this.showError('Please fill in the perfume name and brand.');
@@ -210,7 +222,19 @@ class FragranceAppWithBackend {
     }
     
     try {
-      const perfume = new Perfume(perfumeData);
+      // Normalize notes before creating perfume object
+      const normalizedPerfumeData = {
+        ...perfumeData,
+        notes: {
+          top: NoteNormalizer.normalizeArray(perfumeData.notes.top),
+          middle: NoteNormalizer.normalizeArray(perfumeData.notes.middle),
+          base: NoteNormalizer.normalizeArray(perfumeData.notes.base)
+        }
+      };
+      
+      console.log('📋 Manual perfume data (after normalization):', normalizedPerfumeData);
+      
+      const perfume = new Perfume(normalizedPerfumeData);
       console.log('✨ Created manual perfume object:', perfume);
       
       const success = this.userCollection.addPerfume(perfume);
@@ -286,10 +310,12 @@ class FragranceAppWithBackend {
     
     console.log('🔍 Final family result:', family);
     
-    // Parse notes (split by comma and clean up)
+    // Parse and normalize notes (split by comma and clean up)
     const topNotes = this.parseNotesInput(topNotesInput ? topNotesInput.value : '');
     const middleNotes = this.parseNotesInput(middleNotesInput ? middleNotesInput.value : '');
     const baseNotes = this.parseNotesInput(baseNotesInput ? baseNotesInput.value : '');
+    
+    console.log('🔍 Parsed notes before final processing:', { topNotes, middleNotes, baseNotes });
     
     // Generate unique ID for manually added perfume (only if not editing)
     const id = this.isEditing ? this.editingPerfumeId : `manual-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
@@ -299,9 +325,9 @@ class FragranceAppWithBackend {
         name: name,
         brand: brand,
         notes: {
-            top: topNotes.length > 0 ? topNotes : ['Not specified'],
-            middle: middleNotes.length > 0 ? middleNotes : ['Not specified'],
-            base: baseNotes.length > 0 ? baseNotes : ['Not specified']
+            top: topNotes.length > 0 ? topNotes : ['Not Specified'],
+            middle: middleNotes.length > 0 ? middleNotes : ['Not Specified'],
+            base: baseNotes.length > 0 ? baseNotes : ['Not Specified']
         },
         fragranceFamily: family, // This should now be "Oriental Gourmand Green Chypre"
         year: year ? parseInt(year) : null,
@@ -312,16 +338,26 @@ class FragranceAppWithBackend {
     console.log('🔍 === EXTRACT FORM END ===');
     console.log('🔍 Final perfume data:', perfumeData);
     return perfumeData;
-}
+  }
 
   parseNotesInput(input) {
     if (!input || !input.trim()) return [];
     
-    return input
+    // Split by comma, normalize each note, and filter out empty ones
+    const notes = input
       .split(',')
       .map(note => note.trim())
       .filter(note => note.length > 0)
-      .slice(0, 10);
+      .slice(0, 10); // Limit to 10 notes maximum
+    
+    // Normalize all notes for consistent capitalization
+    const normalizedNotes = NoteNormalizer.normalizeArray(notes);
+    
+    console.log('🔍 parseNotesInput - Input:', input);
+    console.log('🔍 parseNotesInput - Raw notes:', notes);
+    console.log('🔍 parseNotesInput - Normalized notes:', normalizedNotes);
+    
+    return normalizedNotes;
   }
 
   initializeTheme() {
@@ -371,8 +407,17 @@ class FragranceAppWithBackend {
       const results = await GoogleFragranceSearchService.searchPerfume(query);
       console.log('🎯 Your AI found these results:', results);
       
-      this.lastSearchResults = results;
-      this.displaySearchResults(results);
+      // Normalize notes in search results for consistency
+      this.lastSearchResults = results.map(result => ({
+        ...result,
+        notes: {
+          top: NoteNormalizer.normalizeArray(result.notes?.top || []),
+          middle: NoteNormalizer.normalizeArray(result.notes?.middle || []),
+          base: NoteNormalizer.normalizeArray(result.notes?.base || [])
+        }
+      }));
+      
+      this.displaySearchResults(this.lastSearchResults);
       
       if (this.searchResults) {
         this.searchResults.classList.remove('hidden');
@@ -552,6 +597,7 @@ class FragranceAppWithBackend {
     
     if (perfumeData) {
       console.log('➕ Creating Perfume object...');
+      // Notes are already normalized from search results processing
       const perfume = new Perfume(perfumeData);
       console.log('✅ Perfume object created:', perfume);
       
@@ -656,13 +702,24 @@ class FragranceAppWithBackend {
       console.log('🔍 Using YOUR RecommendationEngine to find perfumes similar to:', targetPerfume.name);
       
       const allCandidates = await GoogleFragranceSearchService.searchPerfume('');
-      const candidates = allCandidates.filter(p => p.id !== perfumeId);
       
-      console.log('📊 Found', candidates.length, 'candidate perfumes for comparison');
+      // Normalize candidate notes for consistent comparison
+      const normalizedCandidates = allCandidates
+        .filter(p => p.id !== perfumeId)
+        .map(candidate => ({
+          ...candidate,
+          notes: {
+            top: NoteNormalizer.normalizeArray(candidate.notes?.top || []),
+            middle: NoteNormalizer.normalizeArray(candidate.notes?.middle || []),
+            base: NoteNormalizer.normalizeArray(candidate.notes?.base || [])
+          }
+        }));
       
-      const recommendations = RecommendationEngine.findSimilarPerfumes(
+      console.log('📊 Found', normalizedCandidates.length, 'candidate perfumes for comparison');
+      
+      const recommendations = RecommendationEngine.findSimilarPerfumesNormalized(
         targetPerfume, 
-        candidates
+        normalizedCandidates
       );
       
       console.log('🎯 Your AI found these similar perfumes:', recommendations);
@@ -782,13 +839,21 @@ class FragranceAppWithBackend {
       
       const allCandidates = await GoogleFragranceSearchService.searchPerfume('');
       
-      const candidates = allCandidates.filter(candidate => 
-        !this.userCollection.hasPerfume(candidate.id)
-      );
+      // Normalize candidate notes and filter out owned perfumes
+      const normalizedCandidates = allCandidates
+        .filter(candidate => !this.userCollection.hasPerfume(candidate.id))
+        .map(candidate => ({
+          ...candidate,
+          notes: {
+            top: NoteNormalizer.normalizeArray(candidate.notes?.top || []),
+            middle: NoteNormalizer.normalizeArray(candidate.notes?.middle || []),
+            base: NoteNormalizer.normalizeArray(candidate.notes?.base || [])
+          }
+        }));
       
-      const recommendations = RecommendationEngine.getCollectionBasedRecommendations(
+      const recommendations = RecommendationEngine.getCollectionBasedRecommendationsNormalized(
         this.userCollection,
-        candidates,
+        normalizedCandidates,
         5
       );
       
@@ -892,30 +957,28 @@ document.addEventListener('DOMContentLoaded', () => {
   window.fragranceApp = new FragranceAppWithBackend();
 });
 
-    document.addEventListener('DOMContentLoaded', function() {
-        const select = document.getElementById('fragrance-family');
-        const preview = document.getElementById('families-preview');
-        const previewContainer = document.getElementById('selected-families-preview');
+document.addEventListener('DOMContentLoaded', function() {
+    const select = document.getElementById('fragrance-family');
+    const preview = document.getElementById('families-preview');
+    const previewContainer = document.getElementById('selected-families-preview');
+    
+    function updatePreview() {
+        const selected = Array.from(select.selectedOptions).map(option => option.value);
         
-        function updatePreview() {
-            const selected = Array.from(select.selectedOptions).map(option => option.value);
-            
-            if (selected.length === 0) {
-                preview.textContent = 'No families selected';
-                previewContainer.classList.remove('has-selection');
-            } else if (selected.length === 1) {
-                preview.textContent = `Selected: ${selected[0]}`;
-                previewContainer.classList.add('has-selection');
-            } else {
-                preview.textContent = `Selected: ${selected.join(' + ')} → "${selected.join(' ')}"`;
-                previewContainer.classList.add('has-selection');
-            }
+        if (selected.length === 0) {
+            preview.textContent = 'No families selected';
+            previewContainer.classList.remove('has-selection');
+        } else if (selected.length === 1) {
+            preview.textContent = `Selected: ${selected[0]}`;
+            previewContainer.classList.add('has-selection');
+        } else {
+            preview.textContent = `Selected: ${selected.join(' + ')} → "${selected.join(' ')}"`;
+            previewContainer.classList.add('has-selection');
         }
-        
-        if (select) {
-            select.addEventListener('change', updatePreview);
-            updatePreview(); // Initial call
-        }
-
-        
-    });
+    }
+    
+    if (select) {
+        select.addEventListener('change', updatePreview);
+        updatePreview(); // Initial call
+    }
+});
