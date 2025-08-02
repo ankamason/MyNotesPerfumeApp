@@ -96,112 +96,107 @@
 
         <!-- Add this right after the </section> closing tag of collection-section -->
 
-<!-- Manual Entry Modal -->
+<!-- COMPLETE Manual Entry Modal Structure -->
 <div id="manual-entry-modal" class="modal-overlay hidden">
     <div class="modal-content">
+        
+        <!-- Modal Header -->
         <div class="modal-header">
             <h2 class="modal-title">
                 <span class="modal-icon">✨</span>
-                Add Your Own Perfume
+                Add Perfume Manually
             </h2>
-            <button id="close-modal-btn" class="close-btn">×</button>
+            <button id="close-modal-btn" class="close-btn" type="button">&times;</button>
         </div>
         
+        <!-- Modal Form -->
         <form id="manual-perfume-form" class="manual-form">
-            <!-- Basic Information -->
+            
+            <!-- Basic Information Section -->
             <div class="form-section">
-                <h3 class="section-subtitle">Basic Information</h3>
-                
-                <div class="form-group">
-                    <label for="perfume-name" class="form-label">Perfume Name *</label>
-                    <input 
-                        type="text" 
-                        id="perfume-name" 
-                        class="form-input" 
-                        placeholder="e.g., Santal 33, La Vie Est Belle"
-                        required
-                    >
-                </div>
-                
-                <div class="form-group">
-                    <label for="perfume-brand" class="form-label">Brand *</label>
-                    <input 
-                        type="text" 
-                        id="perfume-brand" 
-                        class="form-input" 
-                        placeholder="e.g., Le Labo, Lancôme, Tom Ford"
-                        required
-                    >
-                </div>
+                <h3 class="section-subtitle">
+                    <span>📝</span>
+                    Basic Information
+                </h3>
                 
                 <div class="form-row">
                     <div class="form-group">
-                        <label for="fragrance-family" class="form-label">Fragrance Family</label>
-                        <select id="fragrance-family" class="form-select">
-                            <option value="">Select family (optional)</option>
-                            <option value="Floral">Floral</option>
-                            <option value="Woody">Woody</option>
-                            <option value="Oriental">Oriental</option>
-                            <option value="Fresh">Fresh</option>
-                            <option value="Citrus">Citrus</option>
-                            <option value="Gourmand">Gourmand</option>
-                            <option value="Green">Green</option>
-                            <option value="Chypre">Chypre</option>
-                            <option value="Fougère">Fougère</option>
-                        </select>
+                        <label for="perfume-name" class="form-label">Perfume Name *</label>
+                        <input type="text" id="perfume-name" class="form-input" 
+                               placeholder="e.g., Black Orchid" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="perfume-brand" class="form-label">Brand *</label>
+                        <input type="text" id="perfume-brand" class="form-input" 
+                               placeholder="e.g., Tom Ford" required>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <!-- Multi-Select Fragrance Families -->
+                    <div class="form-group">
+                        <label for="fragrance-family" class="form-label">Fragrance Families</label>
+                        <p class="form-helper">Hold Ctrl (or Cmd on Mac) to select multiple families</p>
+                        
+                        <select id="fragrance-family" class="form-select multi-select" multiple>
+                                <option value="Aromatic">Aromatic</option>
+                                <option value="Chypre">Chypre</option>
+                                <option value="Citrus">Citrus</option>
+                                <option value="Floral">Floral</option>
+                                <option value="Fougère">Fougère</option>
+                                <option value="Fresh">Fresh</option>
+                                <option value="Fruity">Fruity</option>
+                                <option value="Gourmand">Gourmand</option>
+                                <option value="Green">Green</option>
+                                <option value="Musky">Musky</option>
+                                <option value="Oriental">Oriental</option>
+                                <option value="Spicy">Spicy</option>
+                                <option value="Woody">Woody</option>
+                            </select>
+                        
+                        <!-- Live preview of selections -->
+                        <div id="selected-families-preview">
+                            <span id="families-preview">No families selected</span>
+                        </div>
                     </div>
                     
                     <div class="form-group">
                         <label for="perfume-year" class="form-label">Year Released</label>
-                        <input 
-                            type="number" 
-                            id="perfume-year" 
-                            class="form-input" 
-                            placeholder="e.g., 2019"
-                            min="1900"
-                            max="2025"
-                        >
+                        <input type="number" id="perfume-year" class="form-input" 
+                               placeholder="e.g., 2006" min="1900" max="2025">
                     </div>
                 </div>
             </div>
             
-            <!-- Notes Information -->
+            <!-- Fragrance Notes Section -->
             <div class="form-section">
-                <h3 class="section-subtitle">Fragrance Notes</h3>
-                <p class="form-help">Separate multiple notes with commas (e.g., "Rose, Jasmine, Bergamot")</p>
+                <h3 class="section-subtitle">
+                    <span>🌸</span>
+                    Fragrance Notes
+                </h3>
+                <p class="form-help">Enter notes separated by commas (e.g., bergamot, lemon, orange)</p>
                 
                 <div class="form-group">
                     <label for="top-notes" class="form-label">Top Notes</label>
-                    <input 
-                        type="text" 
-                        id="top-notes" 
-                        class="form-input" 
-                        placeholder="e.g., Bergamot, Lemon, Pink Pepper"
-                    >
+                    <input type="text" id="top-notes" class="form-input" 
+                           placeholder="e.g., Bergamot, Lemon, Pink Pepper">
                 </div>
                 
                 <div class="form-group">
                     <label for="middle-notes" class="form-label">Heart/Middle Notes</label>
-                    <input 
-                        type="text" 
-                        id="middle-notes" 
-                        class="form-input" 
-                        placeholder="e.g., Rose, Jasmine, Geranium"
-                    >
+                    <input type="text" id="middle-notes" class="form-input" 
+                           placeholder="e.g., Rose, Jasmine, Ylang-Ylang">
                 </div>
                 
                 <div class="form-group">
                     <label for="base-notes" class="form-label">Base Notes</label>
-                    <input 
-                        type="text" 
-                        id="base-notes" 
-                        class="form-input" 
-                        placeholder="e.g., Sandalwood, Vanilla, Musk"
-                    >
+                    <input type="text" id="base-notes" class="form-input" 
+                           placeholder="e.g., Vanilla, Patchouli, Sandalwood">
                 </div>
             </div>
             
-            <!-- Actions -->
+            <!-- Form Actions -->
             <div class="form-actions">
                 <button type="button" id="cancel-btn" class="btn btn-secondary">
                     <span>❌</span>
@@ -209,9 +204,10 @@
                 </button>
                 <button type="submit" class="btn btn-primary">
                     <span>✨</span>
-                    Add to My Collection
+                    Add to Collection
                 </button>
             </div>
+            
         </form>
     </div>
 </div>

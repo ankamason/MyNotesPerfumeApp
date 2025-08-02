@@ -1,5 +1,3 @@
-// app-backend.js - Using YOUR incredible AI backend!
-
 import { GoogleFragranceSearchService } from './src/services/GoogleFragranceSearchService.js';
 import { UserCollection } from './src/models/UserCollection.js';
 import { Perfume } from './src/models/Perfume.js';
@@ -9,15 +7,13 @@ class FragranceAppWithBackend {
   constructor() {
     console.log('🤖 FragranceAI starting with sophisticated backend!');
     
-    // Initialize your real AI-powered backend!
     this.userCollection = new UserCollection();
     this.lastSearchResults = [];
     
     this.initializeElements();
     this.initializeEventListeners();
     this.initializeTheme();
-    
-    // 🔧 Initialize the collection display
+    this.loadCollection();
     this.updateCollectionDisplay();
     
     console.log('✅ Your AI-powered backend is now running in the browser!');
@@ -29,43 +25,71 @@ class FragranceAppWithBackend {
     });
   }
 
+  loadCollection() {
+    try {
+      const savedPerfumes = localStorage.getItem('fragrance-collection');
+      if (savedPerfumes) {
+        const perfumesData = JSON.parse(savedPerfumes);
+        
+        perfumesData.forEach(perfumeData => {
+          const perfume = new Perfume(perfumeData);
+          this.userCollection.addPerfume(perfume);
+        });
+        
+        console.log(`🔄 Loaded ${perfumesData.length} perfumes from localStorage`);
+      }
+    } catch (error) {
+      console.error('Error loading collection from localStorage:', error);
+      localStorage.removeItem('fragrance-collection');
+    }
+  }
+
+  saveCollection() {
+    try {
+      const perfumes = this.userCollection.getAllPerfumes();
+      localStorage.setItem('fragrance-collection', JSON.stringify(perfumes));
+      console.log(`💾 Saved ${perfumes.length} perfumes to localStorage`);
+    } catch (error) {
+      console.error('Error saving collection to localStorage:', error);
+    }
+  }
+
+  clearCollection() {
+    localStorage.removeItem('fragrance-collection');
+    this.userCollection = new UserCollection();
+    this.updateCollectionDisplay();
+    this.showSuccess('Collection cleared!');
+  }
+
   initializeElements() {
-    // Search elements
     this.searchInput = document.getElementById('search-input');
     this.searchBtn = document.getElementById('search-btn');
     this.searchResults = document.getElementById('search-results');
     this.resultsContainer = document.getElementById('results-container');
     
-    // Collection elements
     this.collectionSection = document.getElementById('collection-section');
     this.collectionContainer = document.getElementById('collection-container');
     this.collectionCount = document.getElementById('collection-count');
     this.analyzeBtn = document.getElementById('analyze-btn');
     
-    // Analysis elements
     this.analysisSection = document.getElementById('analysis-section');
     this.signatureNotes = document.getElementById('signature-notes');
     this.familyChart = document.getElementById('family-chart');
     this.intensityProfile = document.getElementById('intensity-profile');
     
-    // Recommendations elements
     this.recommendationsSection = document.getElementById('recommendations-section');
     this.recommendationsContainer = document.getElementById('recommendations-container');
     
-    // Loading overlay
     this.loadingOverlay = document.getElementById('loading-overlay');
     
-    // Theme toggle
     this.themeBtn = document.getElementById('theme-btn');
     
-    // Manual entry elements
     this.addManualBtn = document.getElementById('add-manual-btn');
     this.manualEntryModal = document.getElementById('manual-entry-modal');
     this.closeModalBtn = document.getElementById('close-modal-btn');
     this.manualPerfumeForm = document.getElementById('manual-perfume-form');
     this.cancelBtn = document.getElementById('cancel-btn');
     
-    // 🔍 Debug: Check if all elements were found
     console.log('🔧 Elements initialized:', {
       searchInput: !!this.searchInput,
       searchBtn: !!this.searchBtn,
@@ -83,7 +107,6 @@ class FragranceAppWithBackend {
   }
 
   initializeEventListeners() {
-    // Search functionality - now using YOUR GoogleFragranceSearchService!
     if (this.searchBtn) {
       this.searchBtn.addEventListener('click', () => this.handleSearch());
     }
@@ -94,7 +117,6 @@ class FragranceAppWithBackend {
       });
     }
     
-    // Search suggestions
     document.querySelectorAll('.suggestion-chip').forEach(chip => {
       chip.addEventListener('click', (e) => {
         const query = e.target.dataset.query;
@@ -105,17 +127,14 @@ class FragranceAppWithBackend {
       });
     });
     
-    // Collection analysis - now using YOUR UserCollection analytics!
     if (this.analyzeBtn) {
       this.analyzeBtn.addEventListener('click', () => this.analyzeCollection());
     }
     
-    // Theme toggle
     if (this.themeBtn) {
       this.themeBtn.addEventListener('click', () => this.toggleTheme());
     }
     
-    // Manual entry listeners
     if (this.addManualBtn) {
       this.addManualBtn.addEventListener('click', () => this.openManualEntryModal());
     }
@@ -132,7 +151,6 @@ class FragranceAppWithBackend {
       this.manualPerfumeForm.addEventListener('submit', (e) => this.handleManualPerfumeSubmit(e));
     }
     
-    // Close modal when clicking outside
     if (this.manualEntryModal) {
       this.manualEntryModal.addEventListener('click', (e) => {
         if (e.target === this.manualEntryModal) {
@@ -141,7 +159,6 @@ class FragranceAppWithBackend {
       });
     }
     
-    // Close modal with Escape key
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && this.manualEntryModal && !this.manualEntryModal.classList.contains('hidden')) {
         this.closeManualEntryModal();
@@ -149,13 +166,11 @@ class FragranceAppWithBackend {
     });
   }
 
-  // Manual entry methods
   openManualEntryModal() {
     console.log('🔓 Opening manual entry modal');
     if (this.manualEntryModal) {
       this.manualEntryModal.classList.remove('hidden');
       
-      // Focus on first input
       setTimeout(() => {
         const nameInput = document.getElementById('perfume-name');
         if (nameInput) nameInput.focus();
@@ -169,7 +184,6 @@ class FragranceAppWithBackend {
       this.manualEntryModal.classList.add('hidden');
     }
     
-    // Reset form
     if (this.manualPerfumeForm) {
       this.manualPerfumeForm.reset();
     }
@@ -178,39 +192,37 @@ class FragranceAppWithBackend {
   async handleManualPerfumeSubmit(e) {
     e.preventDefault();
     console.log('📝 Manual perfume form submitted');
+
+    // 🔍 ADD THIS DEBUG LINE RIGHT AT THE TOP
+    const familySelect = document.getElementById('fragrance-family');
+    console.log('🔍 SUBMISSION: Selected families at form submit:', 
+        Array.from(familySelect.selectedOptions).map(o => o.value));
     
-    // Get form data
+    console.log(this.isEditing ? '💾 Edit perfume form submitted' : '📝 Manual perfume form submitted');
+    
     const perfumeData = this.extractPerfumeFromForm();
     
     console.log('📋 Manual perfume data:', perfumeData);
     
-    // Validate required fields
     if (!perfumeData.name.trim() || !perfumeData.brand.trim()) {
       this.showError('Please fill in the perfume name and brand.');
       return;
     }
     
     try {
-      // Create perfume object
       const perfume = new Perfume(perfumeData);
       console.log('✨ Created manual perfume object:', perfume);
       
-      // Add to collection
       const success = this.userCollection.addPerfume(perfume);
       
       if (success) {
         console.log('✅ Manual perfume added to collection');
         
-        // Update display
+        this.saveCollection();
         this.updateCollectionDisplay();
-        
-        // Show success message
         this.showSuccess(`Added ${perfume.name} to your collection!`);
-        
-        // Close modal
         this.closeManualEntryModal();
         
-        // Scroll to collection
         setTimeout(() => {
           if (this.collectionSection) {
             this.collectionSection.scrollIntoView({ 
@@ -231,10 +243,11 @@ class FragranceAppWithBackend {
   }
 
   extractPerfumeFromForm() {
+    console.log('🔍 === EXTRACT FORM START ===');
+    
     // Get form values
     const nameInput = document.getElementById('perfume-name');
     const brandInput = document.getElementById('perfume-brand');
-    const familyInput = document.getElementById('fragrance-family');
     const yearInput = document.getElementById('perfume-year');
     const topNotesInput = document.getElementById('top-notes');
     const middleNotesInput = document.getElementById('middle-notes');
@@ -242,32 +255,64 @@ class FragranceAppWithBackend {
     
     const name = nameInput ? nameInput.value.trim() : '';
     const brand = brandInput ? brandInput.value.trim() : '';
-    const family = familyInput ? familyInput.value || 'Unclassified' : 'Unclassified';
     const year = yearInput ? yearInput.value || null : null;
+    
+    // 🔧 FIXED: Multi-select fragrance family extraction with better error handling
+    const familySelect = document.getElementById('fragrance-family');
+    console.log('🔍 Family select element found:', !!familySelect);
+    
+    let selectedFamilies = [];
+    let family = 'Unclassified';
+    
+    if (familySelect && familySelect.selectedOptions) {
+        try {
+            selectedFamilies = Array.from(familySelect.selectedOptions).map(option => option.value);
+            console.log('🔍 Successfully extracted families:', selectedFamilies);
+            
+            if (selectedFamilies.length > 0) {
+                family = selectedFamilies.join(' ');
+                console.log('🔍 Joined family string:', family);
+            } else {
+                console.log('🔍 No families selected, using Unclassified');
+            }
+        } catch (error) {
+            console.error('❌ Error extracting families:', error);
+            console.log('🔧 Falling back to Unclassified');
+            family = 'Unclassified';
+        }
+    } else {
+        console.log('❌ Family select element or selectedOptions not found');
+    }
+    
+    console.log('🔍 Final family result:', family);
     
     // Parse notes (split by comma and clean up)
     const topNotes = this.parseNotesInput(topNotesInput ? topNotesInput.value : '');
     const middleNotes = this.parseNotesInput(middleNotesInput ? middleNotesInput.value : '');
     const baseNotes = this.parseNotesInput(baseNotesInput ? baseNotesInput.value : '');
     
-    // Generate unique ID for manually added perfume
-    const id = `manual-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+    // Generate unique ID for manually added perfume (only if not editing)
+    const id = this.isEditing ? this.editingPerfumeId : `manual-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
     
-    return {
-      id: id,
-      name: name,
-      brand: brand,
-      notes: {
-        top: topNotes.length > 0 ? topNotes : ['Not specified'],
-        middle: middleNotes.length > 0 ? middleNotes : ['Not specified'],
-        base: baseNotes.length > 0 ? baseNotes : ['Not specified']
-      },
-      fragranceFamily: family,
-      year: year ? parseInt(year) : null,
-      source: 'manual-entry',
-      description: `Manually added ${family.toLowerCase()} fragrance.`
+    const perfumeData = {
+        id: id,
+        name: name,
+        brand: brand,
+        notes: {
+            top: topNotes.length > 0 ? topNotes : ['Not specified'],
+            middle: middleNotes.length > 0 ? middleNotes : ['Not specified'],
+            base: baseNotes.length > 0 ? baseNotes : ['Not specified']
+        },
+        fragranceFamily: family, // This should now be "Oriental Gourmand Green Chypre"
+        year: year ? parseInt(year) : null,
+        source: 'manual-entry',
+        description: `Manually added ${family.toLowerCase()} fragrance.`
     };
-  }
+    
+    console.log('🔍 === EXTRACT FORM END ===');
+    console.log('🔍 Final perfume data:', perfumeData);
+    return perfumeData;
+}
 
   parseNotesInput(input) {
     if (!input || !input.trim()) return [];
@@ -276,7 +321,7 @@ class FragranceAppWithBackend {
       .split(',')
       .map(note => note.trim())
       .filter(note => note.length > 0)
-      .slice(0, 10); // Limit to 10 notes per category
+      .slice(0, 10);
   }
 
   initializeTheme() {
@@ -323,7 +368,6 @@ class FragranceAppWithBackend {
     this.showLoading();
     
     try {
-      // 🚀 Using YOUR sophisticated search service!
       const results = await GoogleFragranceSearchService.searchPerfume(query);
       console.log('🎯 Your AI found these results:', results);
       
@@ -333,7 +377,6 @@ class FragranceAppWithBackend {
       if (this.searchResults) {
         this.searchResults.classList.remove('hidden');
         
-        // Smooth scroll to results
         this.searchResults.scrollIntoView({ 
           behavior: 'smooth', 
           block: 'start' 
@@ -366,12 +409,15 @@ class FragranceAppWithBackend {
       this.createPerfumeCard(result, 'search')
     ).join('');
     
-    // Attach event listeners
     this.attachCardEventListeners();
   }
 
   createPerfumeCard(perfume, context = 'collection') {
     const isInCollection = this.userCollection.hasPerfume(perfume.id);
+
+    const fragranceFamilies = perfume.fragranceFamily && perfume.fragranceFamily !== 'Unclassified' 
+    ? perfume.fragranceFamily.split(' ') 
+    : ['Unclassified'];
     
     return `
       <div class="perfume-card" data-perfume-id="${perfume.id}">
@@ -406,10 +452,12 @@ class FragranceAppWithBackend {
           </div>
         </div>
 
-        <div class="fragrance-family" style="margin: 1rem 0;">
-          <span style="background: var(--accent-gradient); color: white; padding: 0.25rem 0.75rem; border-radius: 50px; font-size: 0.75rem; font-weight: 500;">
-            ${perfume.fragranceFamily}
-          </span>
+        <div class="fragrance-families" style="margin: 1rem 0; display: flex; flex-wrap: wrap; gap: 0.5rem;">
+          ${fragranceFamilies.map(family => `
+            <span style="background: var(--accent-gradient); color: white; padding: 0.25rem 0.75rem; border-radius: 50px; font-size: 0.75rem; font-weight: 500;">
+              ${family}
+            </span>
+          `).join('')}
         </div>
 
         <div class="card-actions">
@@ -474,7 +522,6 @@ class FragranceAppWithBackend {
   }
 
   attachCardEventListeners() {
-    // Add to collection buttons
     document.querySelectorAll('.add-to-collection-btn').forEach(btn => {
       btn.addEventListener('click', (e) => {
         const perfumeId = e.target.closest('.add-to-collection-btn').dataset.perfumeId;
@@ -482,7 +529,6 @@ class FragranceAppWithBackend {
       });
     });
 
-    // Remove from collection buttons
     document.querySelectorAll('.remove-from-collection-btn').forEach(btn => {
       btn.addEventListener('click', (e) => {
         const perfumeId = e.target.closest('.remove-from-collection-btn').dataset.perfumeId;
@@ -490,7 +536,6 @@ class FragranceAppWithBackend {
       });
     });
 
-    // Find similar buttons - using YOUR RecommendationEngine!
     document.querySelectorAll('.find-similar-btn').forEach(btn => {
       btn.addEventListener('click', (e) => {
         const perfumeId = e.target.closest('.find-similar-btn').dataset.perfumeId;
@@ -502,7 +547,6 @@ class FragranceAppWithBackend {
   async addToCollection(perfumeId) {
     console.log('🎯 ADD TO COLLECTION CALLED with ID:', perfumeId);
     
-    // Find the perfume from search results
     const perfumeData = this.lastSearchResults.find(p => p.id === perfumeId);
     console.log('🔍 Found perfume data:', perfumeData);
     
@@ -518,6 +562,8 @@ class FragranceAppWithBackend {
       console.log('🎨 All perfumes:', this.userCollection.getAllPerfumes());
       
       if (success) {
+        this.saveCollection();
+        
         console.log('🔄 Calling updateCollectionDisplay...');
         this.updateCollectionDisplay();
         
@@ -526,7 +572,6 @@ class FragranceAppWithBackend {
         
         console.log('✅ Collection now has', this.userCollection.getSize(), 'perfumes');
         
-        // Update the button in search results
         const addBtn = document.querySelector(`[data-perfume-id="${perfumeId}"] .add-to-collection-btn`);
         if (addBtn) {
           addBtn.disabled = true;
@@ -534,7 +579,6 @@ class FragranceAppWithBackend {
           console.log('🔄 Updated add button for', perfume.name);
         }
         
-        // 🔧 SCROLL TO COLLECTION SECTION
         setTimeout(() => {
           if (this.collectionSection) {
             this.collectionSection.scrollIntoView({ 
@@ -544,7 +588,6 @@ class FragranceAppWithBackend {
           }
         }, 100);
         
-        // Check if collection container exists and has content
         console.log('🔍 Collection container element:', this.collectionContainer);
         console.log('🔍 Collection container innerHTML length:', this.collectionContainer?.innerHTML?.length);
         console.log('🔍 Collection container content preview:', this.collectionContainer?.innerHTML?.substring(0, 100));
@@ -558,16 +601,16 @@ class FragranceAppWithBackend {
   removeFromCollection(perfumeId) {
     console.log('🗑️ REMOVE FROM COLLECTION CALLED with ID:', perfumeId);
     
-    // 🚀 Using YOUR UserCollection's remove method!
     const success = this.userCollection.removePerfume(perfumeId);
     console.log('📊 Remove success:', success);
     
     if (success) {
+      this.saveCollection();
+      
       console.log('🔄 Updating collection display after removal...');
       this.updateCollectionDisplay();
       this.showSuccess('Perfume removed from collection');
       
-      // Update search results if visible
       const searchCard = document.querySelector(`#search-results [data-perfume-id="${perfumeId}"] .add-to-collection-btn`);
       if (searchCard) {
         searchCard.disabled = false;
@@ -583,20 +626,16 @@ class FragranceAppWithBackend {
     try {
       console.log('🔍 FIND SIMILAR called for ID:', perfumeId);
       
-      // Get the target perfume - try multiple sources
       let targetPerfume = null;
       
-      // First, try to find in search results
       targetPerfume = this.lastSearchResults.find(p => p.id === perfumeId);
       console.log('🔍 Found in search results:', !!targetPerfume);
       
-      // If not found, try in collection
       if (!targetPerfume) {
         targetPerfume = this.userCollection.getAllPerfumes().find(p => p.id === perfumeId);
         console.log('🔍 Found in collection:', !!targetPerfume);
       }
       
-      // If still not found, try to find by name in mock database
       if (!targetPerfume) {
         console.log('🔍 Trying to find by name in mock database...');
         const allCandidates = await GoogleFragranceSearchService.searchPerfume('');
@@ -604,7 +643,6 @@ class FragranceAppWithBackend {
         console.log('🔍 Found in mock database:', !!targetPerfume);
       }
       
-      // Debug: Show what we're working with
       console.log('📋 Available IDs in search results:', this.lastSearchResults.map(p => p.id));
       console.log('📋 Available IDs in collection:', this.userCollection.getAllPerfumes().map(p => p.id));
       
@@ -617,13 +655,11 @@ class FragranceAppWithBackend {
       console.log('✅ Target perfume found:', targetPerfume.name);
       console.log('🔍 Using YOUR RecommendationEngine to find perfumes similar to:', targetPerfume.name);
       
-      // Get candidate perfumes from your service
       const allCandidates = await GoogleFragranceSearchService.searchPerfume('');
       const candidates = allCandidates.filter(p => p.id !== perfumeId);
       
       console.log('📊 Found', candidates.length, 'candidate perfumes for comparison');
       
-      // 🚀 Using YOUR sophisticated RecommendationEngine!
       const recommendations = RecommendationEngine.findSimilarPerfumes(
         targetPerfume, 
         candidates
@@ -636,7 +672,6 @@ class FragranceAppWithBackend {
       if (this.recommendationsSection) {
         this.recommendationsSection.classList.remove('hidden');
         
-        // Scroll to recommendations
         this.recommendationsSection.scrollIntoView({ 
           behavior: 'smooth', 
           block: 'start' 
@@ -661,7 +696,6 @@ class FragranceAppWithBackend {
     this.showLoading();
     
     try {
-      // 🚀 Using YOUR sophisticated UserCollection analytics!
       const popularNotes = this.userCollection.getMostPopularNotes();
       const familyDistribution = this.userCollection.getFamilyDistribution();
       const intensityProfile = this.userCollection.getIntensityProfile();
@@ -672,15 +706,12 @@ class FragranceAppWithBackend {
         intensityProfile
       });
       
-      // Display the analysis using your real backend data
       this.displaySignatureNotes(popularNotes.slice(0, 8));
       this.displayFamilyDistribution(familyDistribution);
       this.displayIntensityProfile(intensityProfile);
       
-      // Get AI recommendations based on your collection
       await this.getCollectionBasedRecommendations();
       
-      // Show analysis sections
       if (this.analysisSection) {
         this.analysisSection.classList.remove('hidden');
       }
@@ -688,7 +719,6 @@ class FragranceAppWithBackend {
         this.recommendationsSection.classList.remove('hidden');
       }
       
-      // Smooth scroll to analysis
       if (this.analysisSection) {
         this.analysisSection.scrollIntoView({ 
           behavior: 'smooth', 
@@ -750,19 +780,16 @@ class FragranceAppWithBackend {
     try {
       console.log('🤖 Using YOUR RecommendationEngine for collection-based recommendations...');
       
-      // Get candidate perfumes
       const allCandidates = await GoogleFragranceSearchService.searchPerfume('');
       
-      // Filter out perfumes already in collection
       const candidates = allCandidates.filter(candidate => 
         !this.userCollection.hasPerfume(candidate.id)
       );
       
-      // 🚀 Using YOUR sophisticated RecommendationEngine!
       const recommendations = RecommendationEngine.getCollectionBasedRecommendations(
         this.userCollection,
         candidates,
-        5 // Top 5 recommendations
+        5
       );
       
       console.log('✨ Your AI recommends these perfumes based on your collection:', recommendations);
@@ -846,7 +873,6 @@ class FragranceAppWithBackend {
   }
 }
 
-// Add CSS animations for toast
 const style = document.createElement('style');
 style.textContent = `
   @keyframes slideDown {
@@ -861,8 +887,35 @@ style.textContent = `
 `;
 document.head.appendChild(style);
 
-// Initialize the app with YOUR sophisticated backend!
 document.addEventListener('DOMContentLoaded', () => {
   console.log('🚀 Loading your AI-powered fragrance app...');
   window.fragranceApp = new FragranceAppWithBackend();
 });
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const select = document.getElementById('fragrance-family');
+        const preview = document.getElementById('families-preview');
+        const previewContainer = document.getElementById('selected-families-preview');
+        
+        function updatePreview() {
+            const selected = Array.from(select.selectedOptions).map(option => option.value);
+            
+            if (selected.length === 0) {
+                preview.textContent = 'No families selected';
+                previewContainer.classList.remove('has-selection');
+            } else if (selected.length === 1) {
+                preview.textContent = `Selected: ${selected[0]}`;
+                previewContainer.classList.add('has-selection');
+            } else {
+                preview.textContent = `Selected: ${selected.join(' + ')} → "${selected.join(' ')}"`;
+                previewContainer.classList.add('has-selection');
+            }
+        }
+        
+        if (select) {
+            select.addEventListener('change', updatePreview);
+            updatePreview(); // Initial call
+        }
+
+        
+    });

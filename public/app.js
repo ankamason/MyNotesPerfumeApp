@@ -1,6 +1,6 @@
 // public/app.js - Modern JavaScript UI Controller
 
-// Import your incredible backend services
+// Import backend services
 import { GoogleFragranceSearchService } from './src/services/GoogleFragranceSearchService.js';
 import { UserCollection } from './src/models/UserCollection.js';
 import { Perfume } from './src/models/Perfume.js';
@@ -20,6 +20,9 @@ class FragranceApp {
     
     // Theme System
     this.initializeTheme();
+    
+    // 🆕 LOAD SAVED COLLECTION
+    this.loadCollection();
     
     console.log('🌟 FragranceAI initialized with your powerful backend!');
   }
@@ -83,6 +86,40 @@ class FragranceApp {
     this.setTheme(savedTheme);
   }
 
+  // 🆕 LOAD SAVED COLLECTION FROM LOCALSTORAGE
+  loadCollection() {
+    try {
+      const savedPerfumes = localStorage.getItem('fragrance-collection');
+      if (savedPerfumes) {
+        const perfumesData = JSON.parse(savedPerfumes);
+        
+        // Reconstruct Perfume objects and add to collection
+        perfumesData.forEach(perfumeData => {
+          const perfume = new Perfume(perfumeData);
+          this.userCollection.addPerfume(perfume);
+        });
+        
+        console.log(`🔄 Loaded ${perfumesData.length} perfumes from localStorage`);
+        this.updateCollectionDisplay();
+      }
+    } catch (error) {
+      console.error('Error loading collection from localStorage:', error);
+      // Clear corrupted data
+      localStorage.removeItem('fragrance-collection');
+    }
+  }
+
+  // 🆕 SAVE COLLECTION TO LOCALSTORAGE
+  saveCollection() {
+    try {
+      const perfumes = this.userCollection.getAllPerfumes();
+      localStorage.setItem('fragrance-collection', JSON.stringify(perfumes));
+      console.log(`💾 Saved ${perfumes.length} perfumes to localStorage`);
+    } catch (error) {
+      console.error('Error saving collection to localStorage:', error);
+    }
+  }
+
   setTheme(theme) {
     document.documentElement.setAttribute('data-theme', theme);
     const themeIcon = this.themeBtn.querySelector('.theme-icon');
@@ -111,8 +148,11 @@ class FragranceApp {
     this.showLoading();
     
     try {
-      // Use your GoogleFragranceSearchService!
+      // Use GoogleFragranceSearchService!
       const results = await GoogleFragranceSearchService.searchPerfume(query);
+      
+      // 🆕 STORE SEARCH RESULTS FOR ADDING TO COLLECTION
+      this.lastSearchResults = results;
       
       this.displaySearchResults(results);
       this.searchResults.classList.remove('hidden');
@@ -272,6 +312,9 @@ class FragranceApp {
       const success = this.userCollection.addPerfume(perfume);
       
       if (success) {
+        // 🆕 SAVE TO LOCALSTORAGE
+        this.saveCollection();
+        
         this.updateCollectionDisplay();
         this.showSuccess(`Added ${perfume.name} to your collection!`);
         
@@ -288,6 +331,9 @@ class FragranceApp {
   removeFromCollection(perfumeId) {
     const success = this.userCollection.removePerfume(perfumeId);
     if (success) {
+      // 🆕 SAVE TO LOCALSTORAGE
+      this.saveCollection();
+      
       this.updateCollectionDisplay();
       this.showSuccess('Perfume removed from collection');
       
@@ -473,6 +519,14 @@ class FragranceApp {
     this.attachCardEventListeners();
   }
 
+  // 🆕 BONUS: CLEAR ALL DATA (USEFUL FOR TESTING)
+  clearCollection() {
+    localStorage.removeItem('fragrance-collection');
+    this.userCollection = new UserCollection();
+    this.updateCollectionDisplay();
+    this.showSuccess('Collection cleared!');
+  }
+
   // Utility methods for storing search results and showing messages
   getStoredSearchResults() {
     return this.lastSearchResults || [];
@@ -535,3 +589,4 @@ document.head.appendChild(style);
 document.addEventListener('DOMContentLoaded', () => {
   window.fragranceApp = new FragranceApp();
 });
+
