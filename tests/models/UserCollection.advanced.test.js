@@ -131,7 +131,7 @@ describe('UserCollection - Advanced Note Analysis', () => {
     expect(suggestions.length).toBeGreaterThan(0);
   });
 
-      // Add this test to see the 9 families in action
+      // Test to see the 9 families in action
     test('should correctly classify notes into the 9 main fragrance families', () => {
     const { NoteClassifier } = require('../../src/data/NoteClassification.js');
   
@@ -162,7 +162,7 @@ describe('UserCollection - Advanced Note Analysis', () => {
   expect(mainFamilies).toContain('MARINE_OZONIC');
 });
 
-      // Add this test to verify aldehydes work perfectly
+      // Test to verify aldehydes work perfectly
     test('should correctly classify aldehyde notes and their vintage character', () => {
     const { NoteClassifier } = require('../../src/data/NoteClassification.js');
   

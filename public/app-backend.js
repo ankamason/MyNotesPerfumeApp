@@ -17,7 +17,7 @@ class FragranceAppWithBackend {
     this.loadCollection();
     this.updateCollectionDisplay();
     
-    console.log('✅ Your AI-powered backend is now running in the browser!');
+    console.log('✅ AI-powered backend is now running in the browser!');
     console.log('👨‍💻 Backend services loaded:', {
       GoogleFragranceSearchService: !!GoogleFragranceSearchService,
       UserCollection: !!UserCollection,
@@ -749,7 +749,7 @@ class FragranceAppWithBackend {
       return;
     }
     
-    console.log('🧠 Using YOUR UserCollection analytics to analyze', this.userCollection.getSize(), 'perfumes...');
+    console.log('🧠 Using UserCollection analytics to analyze', this.userCollection.getSize(), 'perfumes...');
     this.showLoading();
     
     try {
@@ -835,7 +835,7 @@ class FragranceAppWithBackend {
 
   async getCollectionBasedRecommendations() {
     try {
-      console.log('🤖 Using YOUR RecommendationEngine for collection-based recommendations...');
+      console.log('🤖 Using RecommendationEngine for collection-based recommendations...');
       
       const allCandidates = await GoogleFragranceSearchService.searchPerfume('');
       

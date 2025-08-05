@@ -5,7 +5,7 @@ import { NoteNormalizer } from '../utils/NoteNormalizer.js';
 
 class GoogleFragranceSearchService {
   
-  // 🎯 Comprehensive Mock Database - Your AI's Knowledge Base
+  // 🎯 Comprehensive Mock Database - The AI's Knowledge Base
   static mockFragranceDatabase = [
     {
       id: 'chanel-no5',
@@ -78,9 +78,9 @@ class GoogleFragranceSearchService {
       notes: {
         top: ['Orange', 'Mandarin Orange', 'Orange Blossom', 'Bergamot'],
         middle: ['Mimosa', 'Jasmine', 'Turkish Rose', 'Ylang Ylang'],
-        base: ['White Musk', 'Opoponax', 'Tonka Bean', 'Patchouli']
+        base: ['White Musk', 'Vanilla', 'Opoponax', 'Tonka Bean', 'Patchouli', 'Vetiver']
       },
-      fragranceFamily: 'Floral',
+      fragranceFamily: 'Oriental Floral',
       year: 2001,
       source: 'fragrantica.com',
       description: 'A spirited, voluptuous fragrance with a floral heart and woody base.',

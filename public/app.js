@@ -357,10 +357,10 @@ class FragranceApp {
       
       if (!targetPerfume) return;
       
-      // Get all available perfumes as candidates (from your mock database)
+      // Get all available perfumes as candidates (from mock database)
       const candidatePerfumes = await GoogleFragranceSearchService.searchPerfume(''); // Get all
       
-      // Use your RecommendationEngine!
+      // Use RecommendationEngine!
       const recommendations = RecommendationEngine.findSimilarPerfumes(
         targetPerfume, 
         candidatePerfumes.filter(p => p.id !== perfumeId)
@@ -472,7 +472,7 @@ class FragranceApp {
         !this.userCollection.hasPerfume(candidate.id)
       );
       
-      // Use your RecommendationEngine for collection-based recommendations!
+      // Use RecommendationEngine for collection-based recommendations!
       const recommendations = RecommendationEngine.getCollectionBasedRecommendations(
         this.userCollection,
         candidates,
@@ -520,7 +520,7 @@ class FragranceApp {
     this.attachCardEventListeners();
   }
 
-  // 🆕 BONUS: CLEAR ALL DATA (USEFUL FOR TESTING)
+  // 🆕 CLEAR ALL DATA (USEFUL FOR TESTING)
   clearCollection() {
     localStorage.removeItem('fragrance-collection');
     this.userCollection = new UserCollection();

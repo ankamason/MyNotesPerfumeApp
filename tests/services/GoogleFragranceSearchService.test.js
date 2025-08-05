@@ -39,7 +39,7 @@ describe('GoogleFragranceSearchService', () => {
     expect(results[0].brand).toBe('Tom Ford');
   });
   
-  // Replace the failing test with this:
+  // Passing test:
 
 test('should handle multiple potential matches', async () => {
   // Arrange: Search for "Chanel" (should match "Chanel No. 5" and "Coco Mademoiselle")
@@ -89,7 +89,7 @@ test('should handle multiple potential matches', async () => {
     expect(perfume.notes).toEqual(perfumeData.notes);
   });
   
-  // In your test, update the test cases to use comma-separated format:
+  // Updated test cases for use of comma-separated format:
 test('should extract notes from fragrance description text', () => {
   const testCases = [
     {

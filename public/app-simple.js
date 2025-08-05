@@ -3,7 +3,7 @@ class FragranceApp {
   constructor() {
     console.log('🌟 FragranceAI starting...');
     
-    // Mock data that mimics your backend
+    // Mock data that mimics backend
     this.mockPerfumes = [
       {
         id: 'chanel-no5',

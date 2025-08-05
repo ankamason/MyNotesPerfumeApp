@@ -712,7 +712,7 @@ body {
     justify-content: center;
   }
 }
-/* Add this right after your existing .form-select styles */
+
 
 /* Multi-select dropdown styling */
 .form-select.multi-select {

@@ -68,7 +68,7 @@ describe('UserCollection', () => {
     expect(collection.hasPerfume(4)).toBe(true);
   });
 
-  // Test 4: Find perfumes by fragrance family (your domain expertise!)
+  // Test 4: Find perfumes by fragrance family 
   test('should find perfumes by fragrance family', () => {
     const collection = new UserCollection();
     
@@ -90,7 +90,7 @@ describe('UserCollection', () => {
     expect(florals).not.toContain(woody);
   });
 
-  // Test 5: Complex search by notes (leveraging your note expertise!)
+  // Test 5: Complex search by notes 
   test('should find perfumes containing specific notes', () => {
     const collection = new UserCollection();
     
