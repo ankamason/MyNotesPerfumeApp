@@ -1,13 +1,11 @@
 ///src/utils/NoteNormalizer.js
 
-// src/utils/NoteNormalizer.js
-
 class NoteNormalizer {
   
   // Words that should remain lowercase (except when they start a note name)
   static LOWERCASE_WORDS = new Set([
     'and', 'or', 'of', 'the', 'in', 'on', 'at', 'to', 'for', 'with', 'by',
-    'de', 'del', 'la', 'le', 'les', 'du', 'des', 'di', 'da', 'el'
+    'de', 'del', 'la', 'le', 'les', 'du', 'des', 'di', 'da', 'el', '-Of-The-'
   ]);
   
   // Special cases for specific note names that have unique capitalization
@@ -34,7 +32,7 @@ class NoteNormalizer {
     ['herbes de provence', 'Herbes de Provence'],
     
     // Botanical terms
-    ['lily of the valley', 'Lily of the Valley'],
+    ['lily-of-the-valley', 'Lily-of-the-Valley', 'Lily of the Valley'],
     ['night blooming cereus', 'Night Blooming Cereus'],
     
     // Common variations

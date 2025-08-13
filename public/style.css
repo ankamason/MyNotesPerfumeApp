@@ -310,13 +310,13 @@ body {
 
 .confidence-score {
   position: absolute;
-  top: 1rem;
-  right: 1rem;
+  top: 0.2rem;
+  right: 0.1rem;
   background: var(--accent-gradient);
   color: white;
   padding: 0.25rem 0.75rem;
   border-radius: 50px;
-  font-size: 0.75rem;
+  font-size: 0.70rem;
   font-weight: 500;
   z-index: 10;
 }
@@ -472,6 +472,30 @@ body {
   to {
     transform: rotate(360deg);
   }
+}
+
+/* Feature Badges */
+
+.feature-badge {
+    background: var(--bg-glass);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--border-color);
+    padding: 0.5rem 1rem;
+    border-radius: 25px;
+    font-size: 0.875rem;
+    color: var(--text-primary);
+    white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+    .feature-badges {
+        gap: 0.5rem !important;
+    }
+    
+    .feature-badge {
+        font-size: 0.8rem;
+        padding: 0.4rem 0.8rem;
+    }
 }
 
 /* Responsive Design */

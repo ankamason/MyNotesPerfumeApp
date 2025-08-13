@@ -21,14 +21,33 @@
     <div class="container">
         <!-- Hero Section -->
         <header class="hero">
-            <div class="hero-content">
-                <h1 class="hero-title">
-                    <span class="gradient-text">MyNotes Personal Perfume App</span>
-                </h1>
-                <p class="hero-subtitle">
-                    Discover your perfect scent with MyNotes Personal Perfume App
-                </p>
-            </div>
+            <section class="hero">
+    <div class="hero-content">
+        <h1 class="hero-title">
+            <span class="gradient-text">MyNotes Personal Perfume App</span>
+        </h1>
+        <p class="hero-subtitle">
+            Intelligent fragrance discovery powered by AI recommendations, 
+            advanced search algorithms, and personalized collection analytics
+        </p>
+        
+        <!-- Professional feature highlights -->
+        <div class="feature-badges" style="display: flex; justify-content: center; gap: 1rem; margin: 2rem 0; flex-wrap: wrap;">
+            <span class="feature-badge">🤖 AI-Powered Search</span>
+            <span class="feature-badge">📊 Collection Analytics</span>
+            <span class="feature-badge">✨ Smart Recommendations</span>
+            <span class="feature-badge">💾 Persistent Storage</span>
+        </div>
+        
+        <!-- Call-to-action for portfolio viewers -->
+        <div class="cta-section" style="margin: 2rem 0;">
+            <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1rem;">
+                <strong>Demo Instructions:</strong> Try searching "Chanel" or "Tom Ford", add perfumes to your collection, 
+                then click "Analyze My Style" to see AI-powered insights. You are also welcome to add your own fragrances by adding the name, brand, and perhaps using online sources to get the note information to ensure that your collection anaylysis is as complete as possible. 
+            </p>
+        </div>
+    </div>
+</section>
         </header>
 
         <!-- Search Section -->
@@ -40,7 +59,7 @@
                             type="text" 
                             id="search-input" 
                             class="search-input" 
-                            placeholder="Search for any perfume..."
+                            placeholder="Search for a perfume from the suggestions below..."
                             autocomplete="off"
                         >
                         <button id="search-btn" class="search-btn">
@@ -49,10 +68,22 @@
                     </div>
                     <div class="search-suggestions">
                         <span class="suggestion-label">Try:</span>
-                        <button class="suggestion-chip" data-query="Chanel No. 5">Chanel No. 5</button>
-                        <button class="suggestion-chip" data-query="Tom Ford Black Orchid">Black Orchid</button>
-                        <button class="suggestion-chip" data-query="Creed Aventus">Aventus</button>
-                        <button class="suggestion-chip" data-query="Chanel">All Chanel</button>
+                        <button class="suggestion-chip" data-query="Chloé">Chloé</button>
+                        <button class="suggestion-chip" data-query="Tom Ford">Tom Ford</button>
+                        <button class="suggestion-chip" data-query="Guerlain">Guerlain</button>
+                        <button class="suggestion-chip" data-query="Chanel">Chanel</button>
+                        <button class="suggestion-chip" data-query="Dior">Dior</button>
+                        <button class="suggestion-chip" data-query="Versace">Versace</button>
+                        <button class="suggestion-chip" data-query="Yves Saint Laurent">Yves Saint Laurent</button>
+                        <button class="suggestion-chip" data-query="Lancôme">Lancôme</button>
+                        <button class="suggestion-chip" data-query="Marc Jacobs">Marc Jacobs</button>
+                        <button class="suggestion-chip" data-query="Hermès">Hermès</button>
+                        <button class="suggestion-chip" data-query="Diptyque">Diptyque</button>
+                        <button class="suggestion-chip" data-query="Hugo Boss">Hugo Boss</button>
+                        <button class="suggestion-chip" data-query="Jo Malone">Jo Malone</button>
+                        <button class="suggestion-chip" data-query="Roja">Roja</button>
+                    
+
                     </div>
                 </div>
             </div>
@@ -271,7 +302,7 @@
         </div>
     </div>
  <!-- Script Tags Section -->
-    <script type="module" src="config.js"></script>
+    
     <script type="module" src="app-backend.js"></script>
 </body>
 </html>

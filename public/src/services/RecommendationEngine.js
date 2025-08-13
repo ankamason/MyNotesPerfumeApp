@@ -7,7 +7,7 @@ import { NoteNormalizer } from '../utils/NoteNormalizer.js';
 class RecommendationEngine {
   
   // Find perfumes similar to a target perfume
-  static findSimilarPerfumes(targetPerfume, candidatePerfumes, maxResults = 10) {
+  static findSimilarPerfumes(targetPerfume, candidatePerfumes, maxResults = 20) {
     const recommendations = candidatePerfumes.map(candidate => {
       const similarity = this.calculateSimilarityScore(targetPerfume, candidate);
       return {
@@ -50,10 +50,10 @@ class RecommendationEngine {
     
     // 2. FRAGRANCE FAMILY BONUS
     if (perfume1.fragranceFamily === perfume2.fragranceFamily) {
-      score += 0.5;
+      score += 0.8;
       reasoning.push(`Same fragrance family: ${perfume1.fragranceFamily}`);
     }
-    maxPossibleScore += 0.5;
+    maxPossibleScore += 1.0;
     
     // 3. BASE NOTES BONUS (they're more important for longevity)
     const normalizedBase1 = NoteNormalizer.normalizeArray(perfume1.notes.base || []);
@@ -64,10 +64,10 @@ class RecommendationEngine {
     );
     
     if (baseMatches.length > 0) {
-      score += 0.2 * baseMatches.length;
+      score += 0.4 * baseMatches.length;
       reasoning.push(`Shared base notes: ${baseMatches.join(', ')}`);
     }
-    maxPossibleScore += 0.2 * Math.max(normalizedBase1.length, normalizedBase2.length);
+    maxPossibleScore += 0.6 * Math.max(normalizedBase1.length, normalizedBase2.length);
     
     // 4. SUBCATEGORY RELATIONSHIP BONUS (using our classification system!)
     const subcategoryBonus = this.calculateSubcategoryBonus(perfume1, perfume2);
@@ -212,7 +212,7 @@ class RecommendationEngine {
       return { 
         dominantSubcategories: [], 
         signatureNotes: [], 
-        intensityPreference: 'Unknown' 
+        intensityPreference: 'Complex' 
       };
     }
     
@@ -222,7 +222,7 @@ class RecommendationEngine {
     
     // Find dominant subcategories (appear in 40%+ of collection)
     const dominantSubcategories = [];
-    const threshold = Math.max(1, Math.ceil(allPerfumes.length * 0.4)); // At least 40% or minimum 1
+    const threshold = Math.max(3, Math.ceil(allPerfumes.length * 0.6)); // At least 60% or minimum 1
     
     Object.keys(subcategoryAnalysis).forEach(familyKey => {
       Object.keys(subcategoryAnalysis[familyKey]).forEach(subcategoryKey => {
@@ -241,7 +241,7 @@ class RecommendationEngine {
     
     // Find signature notes (appear in 30%+ of collection)
     const noteFrequency = userCollection.getMostPopularNotes();
-    const noteThreshold = Math.max(1, Math.ceil(allPerfumes.length * 0.3));
+    const noteThreshold = Math.max(3, Math.ceil(allPerfumes.length * 0.6));
     const signatureNotes = noteFrequency
       .filter(item => item.count >= noteThreshold)
       .map(item => item.note); // These are already normalized from UserCollection
@@ -294,8 +294,8 @@ class RecommendationEngine {
     });
     
     if (userProfile.signatureNotes.length > 0) {
-      score += (signatureNoteMatches / userProfile.signatureNotes.length) * 0.3;
-      maxPossibleScore += 0.3;
+      score += (signatureNoteMatches / userProfile.signatureNotes.length) * 0.6;
+      maxPossibleScore += 0.6;
     }
     
     // 3. INTENSITY COMPATIBILITY (20% of total score)
